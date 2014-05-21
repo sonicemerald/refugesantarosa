@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		54230089192C393200830A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54230088192C393200830A4C /* Foundation.framework */; };
+		5423008B192C393200830A4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5423008A192C393200830A4C /* CoreGraphics.framework */; };
+		5423008D192C393200830A4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5423008C192C393200830A4C /* UIKit.framework */; };
+		54230093192C393200830A4C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54230091192C393200830A4C /* InfoPlist.strings */; };
+		54230095192C393200830A4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54230094192C393200830A4C /* main.m */; };
+		54230099192C393200830A4C /* rcfAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54230098192C393200830A4C /* rcfAppDelegate.m */; };
+		5423009C192C393200830A4C /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5423009A192C393200830A4C /* Main_iPhone.storyboard */; };
+		5423009F192C393200830A4C /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5423009D192C393200830A4C /* Main_iPad.storyboard */; };
+		542300A2192C393200830A4C /* rcfPodcastInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300A1192C393200830A4C /* rcfPodcastInfoViewController.m */; };
+		542300A5192C393200830A4C /* rcfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300A4192C393200830A4C /* rcfViewController.m */; };
+		542300A7192C393200830A4C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542300A6192C393200830A4C /* Images.xcassets */; };
+		542300AE192C393200830A4C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542300AD192C393200830A4C /* XCTest.framework */; };
+		542300AF192C393200830A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54230088192C393200830A4C /* Foundation.framework */; };
+		542300B0192C393200830A4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5423008C192C393200830A4C /* UIKit.framework */; };
+		542300B8192C393200830A4C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 542300B6192C393200830A4C /* InfoPlist.strings */; };
+		542300BA192C393200830A4C /* Refuge_Christian_FellowshipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300B9192C393200830A4C /* Refuge_Christian_FellowshipTests.m */; };
+		542300CB192C55F100830A4C /* rcfPodcastTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */; };
+		542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300CD192C6C1F00830A4C /* rcfPodcast.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		542300B1192C393200830A4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5423007D192C393200830A4C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 54230084192C393200830A4C;
+			remoteInfo = "Refuge Christian Fellowship";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		54230085192C393200830A4C /* Refuge Christian Fellowship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refuge Christian Fellowship.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		54230088192C393200830A4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5423008A192C393200830A4C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5423008C192C393200830A4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		54230090192C393200830A4C /* Refuge Christian Fellowship-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Refuge Christian Fellowship-Info.plist"; sourceTree = "<group>"; };
+		54230092192C393200830A4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		54230094192C393200830A4C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		54230096192C393200830A4C /* Refuge Christian Fellowship-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Refuge Christian Fellowship-Prefix.pch"; sourceTree = "<group>"; };
+		54230097192C393200830A4C /* rcfAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfAppDelegate.h; sourceTree = "<group>"; };
+		54230098192C393200830A4C /* rcfAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfAppDelegate.m; sourceTree = "<group>"; };
+		5423009B192C393200830A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		5423009E192C393200830A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		542300A0192C393200830A4C /* rcfPodcastInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfPodcastInfoViewController.h; sourceTree = "<group>"; };
+		542300A1192C393200830A4C /* rcfPodcastInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastInfoViewController.m; sourceTree = "<group>"; };
+		542300A3192C393200830A4C /* rcfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfViewController.h; sourceTree = "<group>"; };
+		542300A4192C393200830A4C /* rcfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfViewController.m; sourceTree = "<group>"; };
+		542300A6192C393200830A4C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		542300AC192C393200830A4C /* Refuge Christian FellowshipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Refuge Christian FellowshipTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		542300AD192C393200830A4C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		542300B5192C393200830A4C /* Refuge Christian FellowshipTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Refuge Christian FellowshipTests-Info.plist"; sourceTree = "<group>"; };
+		542300B7192C393200830A4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		542300B9192C393200830A4C /* Refuge_Christian_FellowshipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Refuge_Christian_FellowshipTests.m; sourceTree = "<group>"; };
+		542300C9192C55F100830A4C /* rcfPodcastTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastTableViewController.h; sourceTree = "<group>"; };
+		542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastTableViewController.m; sourceTree = "<group>"; };
+		542300CC192C6C1F00830A4C /* rcfPodcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcast.h; sourceTree = "<group>"; };
+		542300CD192C6C1F00830A4C /* rcfPodcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcast.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		54230082192C393200830A4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5423008B192C393200830A4C /* CoreGraphics.framework in Frameworks */,
+				5423008D192C393200830A4C /* UIKit.framework in Frameworks */,
+				54230089192C393200830A4C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		542300A9192C393200830A4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				542300AE192C393200830A4C /* XCTest.framework in Frameworks */,
+				542300B0192C393200830A4C /* UIKit.framework in Frameworks */,
+				542300AF192C393200830A4C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5423007C192C393200830A4C = {
+			isa = PBXGroup;
+			children = (
+				5423008E192C393200830A4C /* Refuge Christian Fellowship */,
+				542300B3192C393200830A4C /* Refuge Christian FellowshipTests */,
+				54230087192C393200830A4C /* Frameworks */,
+				54230086192C393200830A4C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		54230086192C393200830A4C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54230085192C393200830A4C /* Refuge Christian Fellowship.app */,
+				542300AC192C393200830A4C /* Refuge Christian FellowshipTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		54230087192C393200830A4C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54230088192C393200830A4C /* Foundation.framework */,
+				5423008A192C393200830A4C /* CoreGraphics.framework */,
+				5423008C192C393200830A4C /* UIKit.framework */,
+				542300AD192C393200830A4C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5423008E192C393200830A4C /* Refuge Christian Fellowship */ = {
+			isa = PBXGroup;
+			children = (
+				54230097192C393200830A4C /* rcfAppDelegate.h */,
+				54230098192C393200830A4C /* rcfAppDelegate.m */,
+				5423009A192C393200830A4C /* Main_iPhone.storyboard */,
+				5423009D192C393200830A4C /* Main_iPad.storyboard */,
+				542300A0192C393200830A4C /* rcfPodcastInfoViewController.h */,
+				542300A1192C393200830A4C /* rcfPodcastInfoViewController.m */,
+				542300A3192C393200830A4C /* rcfViewController.h */,
+				542300A4192C393200830A4C /* rcfViewController.m */,
+				542300A6192C393200830A4C /* Images.xcassets */,
+				5423008F192C393200830A4C /* Supporting Files */,
+				542300C9192C55F100830A4C /* rcfPodcastTableViewController.h */,
+				542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */,
+				542300CC192C6C1F00830A4C /* rcfPodcast.h */,
+				542300CD192C6C1F00830A4C /* rcfPodcast.m */,
+			);
+			path = "Refuge Christian Fellowship";
+			sourceTree = "<group>";
+		};
+		5423008F192C393200830A4C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				54230090192C393200830A4C /* Refuge Christian Fellowship-Info.plist */,
+				54230091192C393200830A4C /* InfoPlist.strings */,
+				54230094192C393200830A4C /* main.m */,
+				54230096192C393200830A4C /* Refuge Christian Fellowship-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		542300B3192C393200830A4C /* Refuge Christian FellowshipTests */ = {
+			isa = PBXGroup;
+			children = (
+				542300B9192C393200830A4C /* Refuge_Christian_FellowshipTests.m */,
+				542300B4192C393200830A4C /* Supporting Files */,
+			);
+			path = "Refuge Christian FellowshipTests";
+			sourceTree = "<group>";
+		};
+		542300B4192C393200830A4C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				542300B5192C393200830A4C /* Refuge Christian FellowshipTests-Info.plist */,
+				542300B6192C393200830A4C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		54230084192C393200830A4C /* Refuge Christian Fellowship */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 542300BD192C393200830A4C /* Build configuration list for PBXNativeTarget "Refuge Christian Fellowship" */;
+			buildPhases = (
+				54230081192C393200830A4C /* Sources */,
+				54230082192C393200830A4C /* Frameworks */,
+				54230083192C393200830A4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Refuge Christian Fellowship";
+			productName = "Refuge Christian Fellowship";
+			productReference = 54230085192C393200830A4C /* Refuge Christian Fellowship.app */;
+			productType = "com.apple.product-type.application";
+		};
+		542300AB192C393200830A4C /* Refuge Christian FellowshipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 542300C0192C393200830A4C /* Build configuration list for PBXNativeTarget "Refuge Christian FellowshipTests" */;
+			buildPhases = (
+				542300A8192C393200830A4C /* Sources */,
+				542300A9192C393200830A4C /* Frameworks */,
+				542300AA192C393200830A4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				542300B2192C393200830A4C /* PBXTargetDependency */,
+			);
+			name = "Refuge Christian FellowshipTests";
+			productName = "Refuge Christian FellowshipTests";
+			productReference = 542300AC192C393200830A4C /* Refuge Christian FellowshipTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5423007D192C393200830A4C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = rcf;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = RefugeCF;
+				TargetAttributes = {
+					542300AB192C393200830A4C = {
+						TestTargetID = 54230084192C393200830A4C;
+					};
+				};
+			};
+			buildConfigurationList = 54230080192C393200830A4C /* Build configuration list for PBXProject "Refuge Christian Fellowship" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5423007C192C393200830A4C;
+			productRefGroup = 54230086192C393200830A4C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				54230084192C393200830A4C /* Refuge Christian Fellowship */,
+				542300AB192C393200830A4C /* Refuge Christian FellowshipTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		54230083192C393200830A4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5423009F192C393200830A4C /* Main_iPad.storyboard in Resources */,
+				542300A7192C393200830A4C /* Images.xcassets in Resources */,
+				5423009C192C393200830A4C /* Main_iPhone.storyboard in Resources */,
+				54230093192C393200830A4C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		542300AA192C393200830A4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				542300B8192C393200830A4C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		54230081192C393200830A4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54230099192C393200830A4C /* rcfAppDelegate.m in Sources */,
+				54230095192C393200830A4C /* main.m in Sources */,
+				542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */,
+				542300CB192C55F100830A4C /* rcfPodcastTableViewController.m in Sources */,
+				542300A5192C393200830A4C /* rcfViewController.m in Sources */,
+				542300A2192C393200830A4C /* rcfPodcastInfoViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		542300A8192C393200830A4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				542300BA192C393200830A4C /* Refuge_Christian_FellowshipTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		542300B2192C393200830A4C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 54230084192C393200830A4C /* Refuge Christian Fellowship */;
+			targetProxy = 542300B1192C393200830A4C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		54230091192C393200830A4C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				54230092192C393200830A4C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5423009A192C393200830A4C /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5423009B192C393200830A4C /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		5423009D192C393200830A4C /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5423009E192C393200830A4C /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		542300B6192C393200830A4C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				542300B7192C393200830A4C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		542300BB192C393200830A4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		542300BC192C393200830A4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		542300BE192C393200830A4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
+				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		542300BF192C393200830A4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
+				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		542300C1192C393200830A4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Refuge Christian Fellowship.app/Refuge Christian Fellowship";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Refuge Christian FellowshipTests/Refuge Christian FellowshipTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		542300C2192C393200830A4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Refuge Christian Fellowship.app/Refuge Christian Fellowship";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
+				INFOPLIST_FILE = "Refuge Christian FellowshipTests/Refuge Christian FellowshipTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		54230080192C393200830A4C /* Build configuration list for PBXProject "Refuge Christian Fellowship" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				542300BB192C393200830A4C /* Debug */,
+				542300BC192C393200830A4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		542300BD192C393200830A4C /* Build configuration list for PBXNativeTarget "Refuge Christian Fellowship" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				542300BE192C393200830A4C /* Debug */,
+				542300BF192C393200830A4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		542300C0192C393200830A4C /* Build configuration list for PBXNativeTarget "Refuge Christian FellowshipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				542300C1192C393200830A4C /* Debug */,
+				542300C2192C393200830A4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5423007D192C393200830A4C /* Project object */;
+}
