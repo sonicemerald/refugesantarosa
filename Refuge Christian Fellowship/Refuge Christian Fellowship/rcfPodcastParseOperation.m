@@ -16,7 +16,7 @@ NSString *kAddPodcastEpisodeNotification = @"AddEpisodeNotif";
 NSString *kPodcastResultsKey = @"EarthquakeResultsKey";
 
 // NSNotification name for reporting errors
-NSString *kPocastErrorNotification = @"PodcastErrorNotif";
+NSString *kPodcastErrorNotification = @"PodcastErrorNotif";
 
 // NSNotification userInfo key for obtaining the error message
 NSString *kPodcastMessageErrorKey = @"PodcastMsgErrorKey";
@@ -29,10 +29,9 @@ NSString *kPodcastMessageErrorKey = @"PodcastMsgErrorKey";
 
 @implementation rcfPodcastParseOperation
 {
-    NSDateFormatter *_dateFormatter;
     BOOL _accumulatingParsedCharacterData;
     BOOL _didAbortParsing;
-    NSUInteger _parsedEarthquakesCounter;
+    NSUInteger _parsedPodcastCounter;
 }
 
 - (id)initWithData:(NSData *)parseData {
@@ -40,11 +39,6 @@ NSString *kPodcastMessageErrorKey = @"PodcastMsgErrorKey";
     self = [super init];
     if (self) {
         _podcastData = [parseData copy];
-        
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        [_dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-        [_dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
-        [_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
         
         _currentParseBatch = [[NSMutableArray alloc] init];
         _currentParsedCharacterData = [[NSMutableString alloc] init];
@@ -89,11 +83,11 @@ static NSUInteger const kSizeOfPodcastsBatch = 10;
 // Reduce potential parsing errors by using string constants declared in a single place.
 static NSString * const kItemElementName = @"item";
 static NSString * const kTitleElementName = @"title";
-static NSString * const kSubTitleElementName = @"subtitle";
-static NSString * const kAuthorElementName = @"author";
-static NSString * const kPubDateElementName = @"PubDate";
-static NSString * const kSummaryElementName = @"summary";
-static NSString * const kLinkElementName = @"url";
+static NSString * const kSubTitleElementName = @"itunes:subtitle";
+static NSString * const kAuthorElementName = @"itunes:author";
+static NSString * const kPubDateElementName = @"pubDate";
+static NSString * const kSummaryElementName = @"itunes:summary";
+static NSString * const kLinkElementName = @"guid";
 
 
 #pragma mark - NSXMLParser delegate methods
@@ -103,7 +97,7 @@ static NSString * const kLinkElementName = @"url";
     /*
      If the number of parsed podcasts is greater than kMaximumNumberOfpodcastsToParse, abort the parse.
      */
-    if (_parsedPodcastsCounter >= kMaximumNumberOfPodcastEpisodesToParse) {
+    if (_parsedPodcastCounter >= kMaximumNumberOfPodcastEpisodesToParse) {
         /*
          Use the flag didAbortParsing to distinguish between this deliberate stop and other parser errors.
          */
@@ -118,7 +112,8 @@ static NSString * const kLinkElementName = @"url";
              [elementName isEqualToString:kSubTitleElementName] ||
              [elementName isEqualToString:kAuthorElementName] ||
              [elementName isEqualToString:kPubDateElementName] ||
-             [elementName isEqualToString:kSummaryElementName] ){
+             [elementName isEqualToString:kSummaryElementName] ||
+             [elementName isEqualToString:kLinkElementName]){
         // For the 'title', 'subtitle', 'author', 'pubdate' or 'summary' element begin accumulating parsed character data.
         // The contents are collected in parser:foundCharacters:.
             _accumulatingParsedCharacterData = YES;
@@ -126,6 +121,84 @@ static NSString * const kLinkElementName = @"url";
             [self.currentParsedCharacterData setString:@""];
     }
 }
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    
+    if ([elementName isEqualToString:kItemElementName]) {
+        [self.currentParseBatch addObject:self.currentPodcastObject];
+        _parsedPodcastCounter++;
+        
+        if ([self.currentParseBatch count] >= kSizeOfPodcastsBatch) {
+            [self performSelectorOnMainThread:@selector(addPodcastEpisodesToList:) withObject:self.currentParseBatch waitUntilDone:NO];
+            self.currentParseBatch = [NSMutableArray array];
+        }
+    }
+    else if ([elementName isEqualToString:kTitleElementName]) {
+        /*
+         here's an example of the title
+         <title>John 5:1-15</title>
+        */
+        self.currentPodcastObject.title = self.currentParsedCharacterData;
+        NSLog(@"the currentParsedCharacterData is %@", self.currentParsedCharacterData);
+    }
+    else if ([elementName isEqualToString:kSubTitleElementName]) {
+        self.currentPodcastObject.subtitle = self.currentParsedCharacterData;
+        NSLog(@"The subtitle is: %@", self.currentParsedCharacterData);
+    }
+    else if ([elementName isEqualToString:kLinkElementName])
+    {
+        /*
+         an example:
+         <guid>http://www.podtrac.com/pts/redirect.mp3/www.refugecf.com/podcast/John%205_1-15.mp3</guid>*/
+        self.currentPodcastObject.guidlink = self.currentParsedCharacterData;
+    }
+    else if ([elementName isEqualToString:kSummaryElementName])
+    {
+        NSLog(@"the summary is %@", self.currentParsedCharacterData);
+        self.currentPodcastObject.summary = self.currentParsedCharacterData;
+        
+    }
+    else if ([elementName isEqualToString:kPubDateElementName])
+    {
+        self.currentPodcastObject.date = self.currentParsedCharacterData;
+    }
+    // Stop accumulating parsed character data. We won't start again until specific elements begin.
+    _accumulatingParsedCharacterData = NO;
+}
+
+/**
+ This method is called by the parser when it find parsed character data ("PCDATA") in an element. The parser is not guaranteed to deliver all of the parsed character data for an element in a single invocation, so it is necessary to accumulate character data until the end of the element is reached.
+ */
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    
+    if (_accumulatingParsedCharacterData) {
+        // If the current element is one whose content we care about, append 'string'
+        // to the property that holds the content of the current element.
+        //
+        [self.currentParsedCharacterData appendString:string];
+    }
+}
+
+/**
+ An error occurred while parsing the podcast data: post the error as an NSNotification to our app delegate.
+ */
+- (void)handlePodcastsError:(NSError *)parseError {
+    
+    assert([NSThread isMainThread]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPodcastErrorNotification object:self userInfo:@{kPodcastMessageErrorKey: parseError}];
+}
+
+/**
+ An error occurred while parsing the podcast data, pass the error to the main thread for handling.
+ (Note: don't report an error if we aborted the parse due to a max limit of earthquakes.)
+ */
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+    
+    if ([parseError code] != NSXMLParserDelegateAbortedParseError && !_didAbortParsing) {
+        [self performSelectorOnMainThread:@selector(handlePodcastsError:) withObject:parseError waitUntilDone:NO];
+    }
+}
+
 
 
 @end

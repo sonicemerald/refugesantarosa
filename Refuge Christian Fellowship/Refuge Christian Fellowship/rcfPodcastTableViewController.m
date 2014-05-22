@@ -7,6 +7,7 @@
 //
 
 #import "rcfPodcastTableViewController.h"
+#import "rcfPodcastTableViewCell.h"
 #import "rcfPodcast.h"
 #import "rcfPodcastParseOperation.h"
 
@@ -58,7 +59,7 @@
         } else {
             //check for any response errors
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if ((([httpResponse statusCode]/100) == 2) && [[response MIMEType] isEqual:@"application/atom+xml"]) {
+            if ((([httpResponse statusCode]/100) == 2) && [[response MIMEType] isEqual:@"application/rss+xml"]) {
                 
                 // Update the UI and start parsing the data,
                 // Spawn an NSOperation to parse the earthquake data so that the UI is not
@@ -83,10 +84,10 @@
     // We'll turn it off when the connection finishes or experiences an error.
     //
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    self.parseQuene = [NSOperation new];
+    self.parseQuene = [NSOperationQueue new];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEpisode) name:kaddEpisodeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PodcastError) name:kpodcastError object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addPodcasts:) name:kAddPodcastEpisodeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(podcastError:) name:kPodcastErrorNotification object:nil];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -103,12 +104,19 @@
     NSString *okTitle = NSLocalizedString(@"OK", @"OK Title for displaying when download or parse error occurs");
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:errorMessage delegate:nil cancelButtonTitle:okTitle otherButtonTitles:nil];
+    [alertView show];
 }
 
 //NSNotification callback from the running NSOperation when a parsing error has occured
 -(void)podcastError:(NSNotification *)notif {
     assert(([NSThread isMainThread]));
-    [self handleError:[[notif userInfo] valueForKey:kPodcastsMessageErrorKey]];
+    [self handleError:[[notif userInfo] valueForKey:kPodcastMessageErrorKey]];
+}
+
+-(void)addPodcasts:(NSNotification *)notif
+{
+    assert([NSThread isMainThread]);
+    [self addPodcastsToList:[[notif userInfo] valueForKey:kPodcastResultsKey]];
 }
 
 -(void)addPodcastsToList:(NSArray *)podcasts {
@@ -117,7 +125,7 @@
     NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:podcastCount];
     
     for(NSInteger row = startingRow; row < (startingRow + podcastCount); row++){
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0]
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
         [indexPaths addObject:indexPath];
     }
     
@@ -137,11 +145,12 @@
     // for the cell I need the title, author, and date.
     static NSString *cellDQ = @"DQ";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellDQ forIndexPath:indexPath];
+    rcfPodcastTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellDQ forIndexPath:indexPath];
     // Configure the cell...
     
     //get specefic podcast
     rcfPodcast *podcast = (self.podcastList)[indexPath.row];
+    
     
     [cell configureWithPodcast:podcast];
     return cell;
@@ -211,8 +220,8 @@
 
 -(void)dealloc {
     //no longer interested in these notifcations
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kaddEpisodeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kpodcastError object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kAddPodcastEpisodeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPodcastErrorNotification object:nil];
 }
 
 @end

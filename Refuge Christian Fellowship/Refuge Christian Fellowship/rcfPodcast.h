@@ -13,7 +13,7 @@
 @property (nonatomic) NSString *title; 
 @property (nonatomic) NSString *subtitle;
 @property (nonatomic) NSString *author;
-@property (nonatomic) NSDate *date;
+@property (nonatomic) NSString *date;
 @property (nonatomic) NSString *summary;
-@property (nonatomic) NSURL *audiofile;
+@property (nonatomic) NSString *guidlink;
 @end
