@@ -25,6 +25,7 @@
 		542300BA192C393200830A4C /* Refuge_Christian_FellowshipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300B9192C393200830A4C /* Refuge_Christian_FellowshipTests.m */; };
 		542300CB192C55F100830A4C /* rcfPodcastTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */; };
 		542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300CD192C6C1F00830A4C /* rcfPodcast.m */; };
+		542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D0192D600800830A4C /* rcfPodcastParseOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastTableViewController.m; sourceTree = "<group>"; };
 		542300CC192C6C1F00830A4C /* rcfPodcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcast.h; sourceTree = "<group>"; };
 		542300CD192C6C1F00830A4C /* rcfPodcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcast.m; sourceTree = "<group>"; };
+		542300CF192D600800830A4C /* rcfPodcastParseOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastParseOperation.h; sourceTree = "<group>"; };
+		542300D0192D600800830A4C /* rcfPodcastParseOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastParseOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */,
 				542300CC192C6C1F00830A4C /* rcfPodcast.h */,
 				542300CD192C6C1F00830A4C /* rcfPodcast.m */,
+				542300CF192D600800830A4C /* rcfPodcastParseOperation.h */,
+				542300D0192D600800830A4C /* rcfPodcastParseOperation.m */,
 			);
 			path = "Refuge Christian Fellowship";
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */,
 				54230099192C393200830A4C /* rcfAppDelegate.m in Sources */,
 				54230095192C393200830A4C /* main.m in Sources */,
 				542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */,

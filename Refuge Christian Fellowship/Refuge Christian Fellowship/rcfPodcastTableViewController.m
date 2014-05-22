@@ -8,6 +8,7 @@
 
 #import "rcfPodcastTableViewController.h"
 #import "rcfPodcast.h"
+#import "rcfPodcastParseOperation.h"
 
 @interface rcfPodcastTableViewController ()
 @property (nonatomic) NSMutableArray *podcastList;
@@ -63,8 +64,8 @@
                 // Spawn an NSOperation to parse the earthquake data so that the UI is not
                 // blocked while the application parses the XML data.
                 //
-                APLParseOperation *parseOperation = [[APLParseOperation alloc] initWithData:data];
-                [self.parseQueue addOperation:parseOperation];
+                   rcfPodcastParseOperation *parseOperation = [[rcfPodcastParseOperation alloc] initWithData:data];
+                [self.parseQuene addOperation:parseOperation];
             }
             else {
                 NSString *errorString =
@@ -95,11 +96,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
--(void)dealloc {
-        //no longer interested in these notifcations
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kaddEpisodeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kpodcastError object:nil];
-}
 
 -(void)handleError:(NSError *)error {
     NSString *errorMessage = [error localizedDescription];
@@ -212,5 +208,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)dealloc {
+    //no longer interested in these notifcations
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kaddEpisodeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kpodcastError object:nil];
+}
 
 @end
