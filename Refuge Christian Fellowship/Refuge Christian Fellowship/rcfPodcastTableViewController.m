@@ -149,8 +149,9 @@
     // Configure the cell...
     
     //get specefic podcast
-    rcfPodcast *podcast = (self.podcastList)[indexPath.row];
-    
+    rcfPodcast *podcast = [self.podcastList objectAtIndex:indexPath.row];
+//    rcfPodcast *podcast = (self.podcastList)[indexPath.row];
+    NSLog(@"Podcast being populated: %@", podcast);
     
     [cell configureWithPodcast:podcast];
     return cell;
@@ -159,6 +160,24 @@
 //when a user taps a item in the table, display a new view with the podcast information
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //load a new view initialized with contents of podcast episode;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if( section == 0 )
+        return 65;
+    return 45;
+}
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *text = @"Podcasts";
+    return text;
 }
 
 

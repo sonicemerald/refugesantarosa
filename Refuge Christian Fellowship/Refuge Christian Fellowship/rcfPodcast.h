@@ -10,10 +10,10 @@
 
 @interface rcfPodcast : NSObject
 
-@property (nonatomic) NSString *title; 
-@property (nonatomic) NSString *subtitle;
-@property (nonatomic) NSString *author;
-@property (nonatomic) NSString *date;
-@property (nonatomic) NSString *summary;
-@property (nonatomic) NSString *guidlink;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, copy) NSString *summary;
+@property (nonatomic, copy) NSString *guidlink;
+@property (nonatomic, copy) NSString *date;
 @end
