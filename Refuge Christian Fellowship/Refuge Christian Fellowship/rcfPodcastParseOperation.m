@@ -202,7 +202,10 @@ if(self.currentPodcastObject != nil){
     }
     
     if ([elementName isEqualToString:kPubDateElementName]) {
-        self.currentPodcastObject.date = self.currentParsedCharacterData;
+        
+        NSString *date = [self.currentParsedCharacterData substringToIndex:[self.currentParsedCharacterData length]-15];
+        
+        self.currentPodcastObject.date = date;
         NSLog(@"the date is %@", self.currentParsedCharacterData);
         return;
     }
