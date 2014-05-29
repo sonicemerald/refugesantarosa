@@ -10,8 +10,10 @@
 #import "rcfPodcastTableViewCell.h"
 #import "rcfPodcast.h"
 #import "rcfPodcastParseOperation.h"
+#import "rcfPodcastDetailView.h"
 
 @interface rcfPodcastTableViewController ()
+@property (nonatomic) rcfPodcast *podcast;
 @property (nonatomic) NSMutableArray *podcastList;
 @property (nonatomic) NSOperationQueue *parseQuene;
 
@@ -160,6 +162,22 @@
 //when a user taps a item in the table, display a new view with the podcast information
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //load a new view initialized with contents of podcast episode;
+   // rcfPodcastDetailView * detailView = [[rcfPodcastDetailView alloc] init];
+//    rcfPodcast *podcast = [self.podcastList objectAtIndex:indexPath.row];
+//    self.podcast = podcast;
+//    [detailView initWithPodcast:podcast];
+  //  [self.navigationController pushViewController:detailView animated:YES];
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"PodcastList2Detail"])
+    {
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        rcfPodcastDetailView *controller = [segue destinationViewController];
+        controller.podcast = [self.podcastList objectAtIndex:myIndexPath.row];
+    }
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -167,18 +185,18 @@
     return 1;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if( section == 0 )
-        return 65;
-    return 45;
-}
-
-- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString *text = @"Podcasts";
-    return text;
-}
+//- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    if( section == 0 )
+//        return 65;
+//    return 45;
+//}
+//
+//- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    NSString *text = @"Podcasts";
+//    return text;
+//}
 
 
 - (void)didReceiveMemoryWarning

@@ -15,7 +15,6 @@
 		54230099192C393200830A4C /* rcfAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54230098192C393200830A4C /* rcfAppDelegate.m */; };
 		5423009C192C393200830A4C /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5423009A192C393200830A4C /* Main_iPhone.storyboard */; };
 		5423009F192C393200830A4C /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5423009D192C393200830A4C /* Main_iPad.storyboard */; };
-		542300A2192C393200830A4C /* rcfPodcastInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300A1192C393200830A4C /* rcfPodcastInfoViewController.m */; };
 		542300A5192C393200830A4C /* rcfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300A4192C393200830A4C /* rcfViewController.m */; };
 		542300A7192C393200830A4C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542300A6192C393200830A4C /* Images.xcassets */; };
 		542300AE192C393200830A4C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542300AD192C393200830A4C /* XCTest.framework */; };
@@ -27,6 +26,7 @@
 		542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300CD192C6C1F00830A4C /* rcfPodcast.m */; };
 		542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D0192D600800830A4C /* rcfPodcastParseOperation.m */; };
 		542300D4192DD11F00830A4C /* rcfPodcastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */; };
+		5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +52,6 @@
 		54230098192C393200830A4C /* rcfAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfAppDelegate.m; sourceTree = "<group>"; };
 		5423009B192C393200830A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		5423009E192C393200830A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		542300A0192C393200830A4C /* rcfPodcastInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfPodcastInfoViewController.h; sourceTree = "<group>"; };
-		542300A1192C393200830A4C /* rcfPodcastInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastInfoViewController.m; sourceTree = "<group>"; };
 		542300A3192C393200830A4C /* rcfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfViewController.h; sourceTree = "<group>"; };
 		542300A4192C393200830A4C /* rcfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfViewController.m; sourceTree = "<group>"; };
 		542300A6192C393200830A4C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -70,6 +68,8 @@
 		542300D0192D600800830A4C /* rcfPodcastParseOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastParseOperation.m; sourceTree = "<group>"; };
 		542300D2192DD11F00830A4C /* rcfPodcastTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastTableViewCell.h; sourceTree = "<group>"; };
 		542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastTableViewCell.m; sourceTree = "<group>"; };
+		5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastDetailView.h; sourceTree = "<group>"; };
+		5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastDetailView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +133,6 @@
 				54230098192C393200830A4C /* rcfAppDelegate.m */,
 				5423009A192C393200830A4C /* Main_iPhone.storyboard */,
 				5423009D192C393200830A4C /* Main_iPad.storyboard */,
-				542300A0192C393200830A4C /* rcfPodcastInfoViewController.h */,
-				542300A1192C393200830A4C /* rcfPodcastInfoViewController.m */,
 				542300A3192C393200830A4C /* rcfViewController.h */,
 				542300A4192C393200830A4C /* rcfViewController.m */,
 				542300A6192C393200830A4C /* Images.xcassets */,
@@ -147,6 +145,8 @@
 				542300D0192D600800830A4C /* rcfPodcastParseOperation.m */,
 				542300D2192DD11F00830A4C /* rcfPodcastTableViewCell.h */,
 				542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */,
+				5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */,
+				5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */,
 			);
 			path = "Refuge Christian Fellowship";
 			sourceTree = "<group>";
@@ -285,8 +285,8 @@
 				54230095192C393200830A4C /* main.m in Sources */,
 				542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */,
 				542300CB192C55F100830A4C /* rcfPodcastTableViewController.m in Sources */,
+				5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */,
 				542300A5192C393200830A4C /* rcfViewController.m in Sources */,
-				542300A2192C393200830A4C /* rcfPodcastInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +501,7 @@
 				542300BF192C393200830A4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		542300C0192C393200830A4C /* Build configuration list for PBXNativeTarget "Refuge Christian FellowshipTests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +510,7 @@
 				542300C2192C393200830A4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
