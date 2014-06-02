@@ -7,7 +7,13 @@
 //
 
 #import "rcfPodcastDetailView.h"
+#import <AVFoundation/AVFoundation.h>
+
 @implementation rcfPodcastDetailView
+
+AVPlayer *player;
+NSTimer *playbackTimer;
+BOOL isPlaying;
 
 - (void) viewDidLoad{
 
@@ -15,6 +21,44 @@
     self.podcastSubtitle.text = self.podcast.subtitle;
     self.podcastDate.text = self.podcast.date;
     [self.podcastSummary loadHTMLString:self.podcast.summary baseURL:nil];
-    NSURL *url = [NSURL URLWithString:self.podcast.guidlink];
+    NSURL *urlStream = [NSURL URLWithString:self.podcast.guidlink];
+    
+    AVAsset *asset = [AVURLAsset URLAssetWithURL:urlStream options:nil];
+    AVPlayerItem *anItem = [AVPlayerItem playerItemWithAsset:asset];
+    
+    player = [AVPlayer playerWithPlayerItem:anItem];
+    [player addObserver:self forKeyPath:@"status" options:0 context:nil];
+    
+    [self.playpausebtn addTarget:self action:@selector(didPressPlay:) forControlEvents:UIControlEventTouchUpInside];
+    
+    isPlaying = false;
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    if (object == player && [keyPath isEqualToString:@"status"]) {
+        if (player.status == AVPlayerStatusFailed) {
+            NSLog(@"AVPlayer Failed");
+        } else if (player.status == AVPlayerStatusReadyToPlay) {
+            NSLog(@"AVPlayer Ready to Play");
+        } else if (player.status == AVPlayerItemStatusUnknown) {
+            NSLog(@"AVPlayer Unknown");
+        }
+    }
+}
+
+
+-(void)didPressPlay:(UITapGestureRecognizer *) sender{
+    if(!isPlaying){
+        [player play];
+        NSLog(@"Playing audio");
+        isPlaying = true; }
+    else {
+        [player pause];
+        NSLog(@"Pausing audio");
+        isPlaying = false;
+    }
+}
+
+
 @end

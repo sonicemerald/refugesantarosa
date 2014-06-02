@@ -141,6 +141,7 @@
                     <tabBarItem key="tabBarItem" title="First" image="first" id="u1e-5L-l1D"/>
                     <navigationItem key="navigationItem" id="Rx1-kk-Om5"/>
                     <connections>
+                        <outlet property="playpausebtn" destination="pO5-hQ-c05" id="Lh2-Yx-UMB"/>
                         <outlet property="podcastDate" destination="kc6-00-UNx" id="ioY-GK-AMn"/>
                         <outlet property="podcastSubtitle" destination="NbB-lQ-aIe" id="d3A-Tc-JEs"/>
                         <outlet property="podcastSummary" destination="cW2-Zz-tgZ" id="ocC-5J-xvY"/>
@@ -149,7 +150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1223" y="-729"/>
+            <point key="canvasLocation" x="1227" y="-729"/>
         </scene>
         <!--Table View Controller - Item-->
         <scene sceneID="P8t-hZ-ajf">

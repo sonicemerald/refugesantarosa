@@ -15,5 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *podcastSubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *podcastDate;
 @property (weak, nonatomic) IBOutlet UIWebView *podcastSummary;
+@property (weak, nonatomic) IBOutlet UIButton *playpausebtn;
+
+
 -(void)initWithPodcast:(rcfPodcast *)podcast;
+
 @end
