@@ -16,6 +16,7 @@
 @property (nonatomic) rcfPodcast *podcast;
 @property (nonatomic) NSMutableArray *podcastList;
 @property (nonatomic) NSOperationQueue *parseQuene;
+@property (strong, nonatomic) AVPlayer *audioPlayer;
 
 @end
 
@@ -91,6 +92,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addPodcasts:) name:kAddPodcastEpisodeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(podcastError:) name:kPodcastErrorNotification object:nil];
     
+    self.audioPlayer = [[AVPlayer alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -98,7 +100,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
 
 -(void)handleError:(NSError *)error {
     NSString *errorMessage = [error localizedDescription];
@@ -176,6 +177,10 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         rcfPodcastDetailView *controller = [segue destinationViewController];
         controller.podcast = [self.podcastList objectAtIndex:myIndexPath.row];
+//        NSURL *urltostream = [NSURL URLWithString:[[self.podcastList objectAtIndex:myIndexPath.row] guidlink]];
+        controller.audioPlayer = [[AVPlayer alloc] init];
+        controller.audioPlayer = self.audioPlayer; 
+            
     }
 
 }

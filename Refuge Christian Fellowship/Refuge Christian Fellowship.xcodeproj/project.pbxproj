@@ -27,6 +27,8 @@
 		542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D0192D600800830A4C /* rcfPodcastParseOperation.m */; };
 		542300D4192DD11F00830A4C /* rcfPodcastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */; };
 		5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */; };
+		54D096311961C398005F8CC6 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D096301961C398005F8CC6 /* OBSlider.m */; };
+		54DB961A193FDA180030EE55 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB9619193FDA180030EE55 /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,9 @@
 		542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastTableViewCell.m; sourceTree = "<group>"; };
 		5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastDetailView.h; sourceTree = "<group>"; };
 		5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastDetailView.m; sourceTree = "<group>"; };
+		54D0962F1961C398005F8CC6 /* OBSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSlider.h; sourceTree = "<group>"; };
+		54D096301961C398005F8CC6 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
+		54DB9619193FDA180030EE55 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54DB961A193FDA180030EE55 /* MediaPlayer.framework in Frameworks */,
 				5423008B192C393200830A4C /* CoreGraphics.framework in Frameworks */,
 				5423008D192C393200830A4C /* UIKit.framework in Frameworks */,
 				54230089192C393200830A4C /* Foundation.framework in Frameworks */,
@@ -118,6 +124,7 @@
 		54230087192C393200830A4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54DB9619193FDA180030EE55 /* MediaPlayer.framework */,
 				54230088192C393200830A4C /* Foundation.framework */,
 				5423008A192C393200830A4C /* CoreGraphics.framework */,
 				5423008C192C393200830A4C /* UIKit.framework */,
@@ -129,6 +136,8 @@
 		5423008E192C393200830A4C /* Refuge Christian Fellowship */ = {
 			isa = PBXGroup;
 			children = (
+				54D0962F1961C398005F8CC6 /* OBSlider.h */,
+				54D096301961C398005F8CC6 /* OBSlider.m */,
 				54230097192C393200830A4C /* rcfAppDelegate.h */,
 				54230098192C393200830A4C /* rcfAppDelegate.m */,
 				5423009A192C393200830A4C /* Main_iPhone.storyboard */,
@@ -228,6 +237,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = RefugeCF;
 				TargetAttributes = {
+					54230084192C393200830A4C = {
+						DevelopmentTeam = HYH659GLV5;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					542300AB192C393200830A4C = {
 						TestTargetID = 54230084192C393200830A4C;
 					};
@@ -283,6 +300,7 @@
 				542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */,
 				54230099192C393200830A4C /* rcfAppDelegate.m in Sources */,
 				54230095192C393200830A4C /* main.m in Sources */,
+				54D096311961C398005F8CC6 /* OBSlider.m in Sources */,
 				542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */,
 				542300CB192C55F100830A4C /* rcfPodcastTableViewController.m in Sources */,
 				5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */,
@@ -421,10 +439,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
 				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -434,10 +456,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
 				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
