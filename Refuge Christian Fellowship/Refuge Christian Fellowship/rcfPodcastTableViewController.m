@@ -16,20 +16,10 @@
 @property (nonatomic) rcfPodcast *podcast;
 @property (nonatomic) NSMutableArray *podcastList;
 @property (nonatomic) NSOperationQueue *parseQuene;
-@property (strong, nonatomic) AVPlayer *audioPlayer;
 
 @end
 
 @implementation rcfPodcastTableViewController
-
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-//    self = [super initWithStyle:style];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
 
 - (void)viewDidLoad
 {
@@ -92,7 +82,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addPodcasts:) name:kAddPodcastEpisodeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(podcastError:) name:kPodcastErrorNotification object:nil];
     
-    self.audioPlayer = [[AVPlayer alloc] init];
+    if(self.audioPlayer == nil)
+        self.audioPlayer = [[AVPlayer alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -178,8 +169,28 @@
         rcfPodcastDetailView *controller = [segue destinationViewController];
         controller.podcast = [self.podcastList objectAtIndex:myIndexPath.row];
 //        NSURL *urltostream = [NSURL URLWithString:[[self.podcastList objectAtIndex:myIndexPath.row] guidlink]];
-        controller.audioPlayer = [[AVPlayer alloc] init];
-        controller.audioPlayer = self.audioPlayer; 
+      //  controller.audioPlayer = [[AVPlayer alloc] init];
+
+        controller.audioPlayer = self.audioPlayer;
+        NSLog(@"sending audioPlayer, %@, to detailView", self.audioPlayer);
+        
+//        //Check to see if audio is not playing first.
+//        NSURL *urlStream = [NSURL URLWithString:controller.podcast.guidlink];
+//        AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:urlStream];
+//        if([self.audioPlayer rate] == 0.0){
+//            self.audioPlayer = [self.audioPlayer initWithPlayerItem:item];
+//        } else { //if another episode is playing...
+//            AVURLAsset *currURL = (AVURLAsset *)[self.audioPlayer.currentItem asset];
+//            AVURLAsset *pendingURL = [AVURLAsset URLAssetWithURL:urlStream options:nil];
+//            
+//            if (![currURL.URL isEqual: pendingURL.URL]) {
+//                [self.audioPlayer pause];
+//                NSLog(@"pausing audioPlayer, %@, to set up new one", self.audioPlayer);
+//                [self.audioPlayer replaceCurrentItemWithPlayerItem:item];
+//                NSLog(@"new detailView audioPlayer, %@, after pausing old one", self.audioPlayer);
+//                //[self.audioPlayerplay];
+//            }}
+        
             
     }
 

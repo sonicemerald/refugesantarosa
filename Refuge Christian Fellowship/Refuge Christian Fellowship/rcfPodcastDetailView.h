@@ -22,9 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *elapsedTime;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UIButton *playpausebtn;
-@property (nonatomic) AVPlayer *audioPlayer;
+@property (strong, nonatomic) AVPlayer *audioPlayer;
 @property (nonatomic) NSTimer *playbackTimer;
 
--(void)initWithPodcast:(rcfPodcast *)podcast;
+//-(void)initWithPodcast:(rcfPodcast *)podcast;
 
 @end

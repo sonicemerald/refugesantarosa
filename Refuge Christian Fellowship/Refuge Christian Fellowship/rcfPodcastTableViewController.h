@@ -10,5 +10,5 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface rcfPodcastTableViewController : UITableViewController
-
+@property (strong, nonatomic) AVPlayer *audioPlayer;
 @end
