@@ -27,7 +27,7 @@
     self.podcastList = [NSMutableArray array];
     
     self.tableView.backgroundColor = [UIColor whiteColor];
-    //[UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:100];
+    
     
     
     /*

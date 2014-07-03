@@ -148,7 +148,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="Listen" image="first" id="u1e-5L-l1D"/>
                     <navigationItem key="navigationItem" id="Rx1-kk-Om5"/>
                     <connections>
                         <outlet property="elapsedTime" destination="6kS-fb-Qky" id="Atd-oo-ea3"/>
@@ -165,7 +165,7 @@
             </objects>
             <point key="canvasLocation" x="1227" y="-729"/>
         </scene>
-        <!--Table View Controller - Item-->
+        <!--Table View Controller - Read-->
         <scene sceneID="P8t-hZ-ajf">
             <objects>
                 <tableViewController id="TmC-9j-6T5" sceneMemberID="viewController">
@@ -191,7 +191,7 @@
                             <outlet property="delegate" destination="TmC-9j-6T5" id="4RJ-Kp-sPr"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="boz-jG-wdf"/>
+                    <tabBarItem key="tabBarItem" title="Read" image="second" id="boz-jG-wdf"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="58C-Fh-8Te" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -263,7 +263,7 @@
                             <constraint firstAttribute="centerY" secondItem="DcM-Fx-MKR" secondAttribute="centerY" id="lHZ-e8-ii2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Main" image="second" id="Z7h-1E-pvt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
@@ -293,7 +293,7 @@
         <scene sceneID="tHR-F4-cW6">
             <objects>
                 <navigationController title="Podcasts" automaticallyAdjustsScrollViewInsets="NO" id="b1H-8s-33X" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="hJp-b6-jUN"/>
+                    <tabBarItem key="tabBarItem" title="Listen" image="first" id="hJp-b6-jUN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G3R-or-dmJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
