@@ -10,8 +10,22 @@
 
 @implementation rcfAppDelegate
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+                                                   //colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:100]];
+
+    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setTranslucent:NO];
+                                            //colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:100]];
+    
+    
     // Override point for customization after application launch.
     return YES;
 }

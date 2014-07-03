@@ -21,8 +21,11 @@
 -(void)configureWithPodcast:(rcfPodcast *)podcast
 {
     self.episodeTitle.text = podcast.title;
+ //   self.episodeTitle.textColor = [UICOLor ]
     self.episodeSubtitle.text = podcast.subtitle;
     self.episodeDate.text = podcast.date;
+    
+    self.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:100];
 }
 
 

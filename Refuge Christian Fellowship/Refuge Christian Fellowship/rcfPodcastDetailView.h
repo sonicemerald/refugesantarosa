@@ -13,6 +13,11 @@
 #import "rcfPodcast.h"
 
 @interface rcfPodcastDetailView : UIViewController <AVAudioPlayerDelegate, AVAudioSessionDelegate>
+{
+    float mRestoreAfterScrubbingRate;
+    id mTimeObserver;
+    BOOL restoreVideoPlayStateAfterScrubbing;
+}
 @property (nonatomic) rcfPodcast *podcast;
 @property (weak, nonatomic) IBOutlet UILabel *podcastTitle;
 @property (weak, nonatomic) IBOutlet UILabel *podcastSubtitle;
@@ -24,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *playpausebtn;
 @property (strong, nonatomic) AVPlayer *audioPlayer;
 @property (nonatomic) NSTimer *playbackTimer;
-
+@property (nonatomic) NSMutableDictionary *songInfo;
 //-(void)initWithPodcast:(rcfPodcast *)podcast;
 
 @end
