@@ -25,10 +25,11 @@
 {
     [super viewDidLoad];
     self.podcastList = [NSMutableArray array];
-    
+
     self.tableView.backgroundColor = [UIColor whiteColor];
-    
-    
+    [[UIView appearanceWhenContainedIn:[UITabBar class], nil]
+     setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
+
     
     /*
      Use NSURLConnection to asynchronously download the data. This means the main thread will not be blocked - the application will remain responsive to the user.

@@ -17,28 +17,40 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:68.0/255.0f green:68.0/255.0f blue:68.0/255.0f alpha:1.0]}]; //title text tint is grey
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]]; //tint is teal
+
     
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:68.0/255.0f green:68.0/255.0f blue:68.0/255.0f alpha:1.0]}];
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setTranslucent:NO];
 
+    //Selected Tab is dark gray
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:68/255.0f green:68/255.0f blue:68/255.0f alpha:1.0f]];
     
+    //Non-selected tab is teal, when first loaded.
     [[UIView appearanceWhenContainedIn:[UITabBar class], nil]
      setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],
-                                                        NSForegroundColorAttributeName : [UIColor colorWithRed:68/255.0f green:68/255.0f blue:68/255.0f alpha:1.0f],
-                                                        } forState:UIControlStateSelected];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:
+     @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],
+       NSForegroundColorAttributeName : [UIColor colorWithRed:68/255.0f green:68/255.0f blue:68/255.0f alpha:1.0f], } forState:UIControlStateSelected];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:
+     @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],
+       NSForegroundColorAttributeName : [UIColor colorWithRed:68/255.0f green:68/255.0f blue:68/255.0f alpha:1.0f]
+                                         , } forState:UIControlStateNormal];
+    
+    
 
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
-
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
+    /*[[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]
                                                         } forState:UIControlStateNormal];
-    
+   */
     // Override point for customization after application launch.
     return YES;
 }

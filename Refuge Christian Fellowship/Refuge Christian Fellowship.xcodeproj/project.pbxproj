@@ -27,6 +27,11 @@
 		542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D0192D600800830A4C /* rcfPodcastParseOperation.m */; };
 		542300D4192DD11F00830A4C /* rcfPodcastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */; };
 		5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */; };
+		54AD48CF1967AEC00088D4F4 /* rcfBlogParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */; };
+		54AD48D41967BB5E0088D4F4 /* rcfBlogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48D31967BB5E0088D4F4 /* rcfBlogTableViewController.m */; };
+		54AD48D71967BEA40088D4F4 /* rcfBlogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48D61967BEA40088D4F4 /* rcfBlogTableViewCell.m */; };
+		54AD48DA1967C68F0088D4F4 /* rcfBlogDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48D91967C68F0088D4F4 /* rcfBlogDetailView.m */; };
+		54AD48DD1967C9810088D4F4 /* rcfBlog.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48DC1967C9810088D4F4 /* rcfBlog.m */; };
 		54D096311961C398005F8CC6 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D096301961C398005F8CC6 /* OBSlider.m */; };
 		54DB961A193FDA180030EE55 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB9619193FDA180030EE55 /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +77,16 @@
 		542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastTableViewCell.m; sourceTree = "<group>"; };
 		5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastDetailView.h; sourceTree = "<group>"; };
 		5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastDetailView.m; sourceTree = "<group>"; };
+		54AD48CD1967AEC00088D4F4 /* rcfBlogParseOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfBlogParseOperation.h; sourceTree = "<group>"; };
+		54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfBlogParseOperation.m; sourceTree = "<group>"; };
+		54AD48D01967AF280088D4F4 /* rcfBlog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfBlog.h; sourceTree = "<group>"; };
+		54AD48D31967BB5E0088D4F4 /* rcfBlogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfBlogTableViewController.m; sourceTree = "<group>"; };
+		54AD48D51967BBBC0088D4F4 /* rcfBlogTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfBlogTableViewController.h; sourceTree = "<group>"; };
+		54AD48D61967BEA40088D4F4 /* rcfBlogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfBlogTableViewCell.m; sourceTree = "<group>"; };
+		54AD48D81967BEEA0088D4F4 /* rcfBlogTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfBlogTableViewCell.h; sourceTree = "<group>"; };
+		54AD48D91967C68F0088D4F4 /* rcfBlogDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfBlogDetailView.m; sourceTree = "<group>"; };
+		54AD48DB1967C74A0088D4F4 /* rcfBlogDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfBlogDetailView.h; sourceTree = "<group>"; };
+		54AD48DC1967C9810088D4F4 /* rcfBlog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfBlog.m; sourceTree = "<group>"; };
 		54D0962F1961C398005F8CC6 /* OBSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSlider.h; sourceTree = "<group>"; };
 		54D096301961C398005F8CC6 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
 		54DB9619193FDA180030EE55 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -136,26 +151,20 @@
 		5423008E192C393200830A4C /* Refuge Christian Fellowship */ = {
 			isa = PBXGroup;
 			children = (
+				54AD48CD1967AEC00088D4F4 /* rcfBlogParseOperation.h */,
+				54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */,
 				54D0962F1961C398005F8CC6 /* OBSlider.h */,
 				54D096301961C398005F8CC6 /* OBSlider.m */,
 				54230097192C393200830A4C /* rcfAppDelegate.h */,
 				54230098192C393200830A4C /* rcfAppDelegate.m */,
 				5423009A192C393200830A4C /* Main_iPhone.storyboard */,
 				5423009D192C393200830A4C /* Main_iPad.storyboard */,
-				542300A3192C393200830A4C /* rcfViewController.h */,
-				542300A4192C393200830A4C /* rcfViewController.m */,
+				54AD48D21967AFB50088D4F4 /* Views */,
 				542300A6192C393200830A4C /* Images.xcassets */,
 				5423008F192C393200830A4C /* Supporting Files */,
-				542300C9192C55F100830A4C /* rcfPodcastTableViewController.h */,
-				542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */,
-				542300CC192C6C1F00830A4C /* rcfPodcast.h */,
-				542300CD192C6C1F00830A4C /* rcfPodcast.m */,
-				542300CF192D600800830A4C /* rcfPodcastParseOperation.h */,
-				542300D0192D600800830A4C /* rcfPodcastParseOperation.m */,
-				542300D2192DD11F00830A4C /* rcfPodcastTableViewCell.h */,
-				542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */,
-				5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */,
-				5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */,
+				54AD48D11967AF860088D4F4 /* rcfPodcast */,
+				54AD48D01967AF280088D4F4 /* rcfBlog.h */,
+				54AD48DC1967C9810088D4F4 /* rcfBlog.m */,
 			);
 			path = "Refuge Christian Fellowship";
 			sourceTree = "<group>";
@@ -187,6 +196,54 @@
 				542300B6192C393200830A4C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		54AD48D11967AF860088D4F4 /* rcfPodcast */ = {
+			isa = PBXGroup;
+			children = (
+				542300CC192C6C1F00830A4C /* rcfPodcast.h */,
+				542300CD192C6C1F00830A4C /* rcfPodcast.m */,
+				542300CF192D600800830A4C /* rcfPodcastParseOperation.h */,
+				542300D0192D600800830A4C /* rcfPodcastParseOperation.m */,
+			);
+			name = rcfPodcast;
+			sourceTree = "<group>";
+		};
+		54AD48D21967AFB50088D4F4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				542300A3192C393200830A4C /* rcfViewController.h */,
+				542300A4192C393200830A4C /* rcfViewController.m */,
+				54AD48DF196855F40088D4F4 /* Podcast */,
+				54AD48DE196855E40088D4F4 /* Blog */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		54AD48DE196855E40088D4F4 /* Blog */ = {
+			isa = PBXGroup;
+			children = (
+				54AD48D31967BB5E0088D4F4 /* rcfBlogTableViewController.m */,
+				54AD48D51967BBBC0088D4F4 /* rcfBlogTableViewController.h */,
+				54AD48D61967BEA40088D4F4 /* rcfBlogTableViewCell.m */,
+				54AD48D81967BEEA0088D4F4 /* rcfBlogTableViewCell.h */,
+				54AD48D91967C68F0088D4F4 /* rcfBlogDetailView.m */,
+				54AD48DB1967C74A0088D4F4 /* rcfBlogDetailView.h */,
+			);
+			name = Blog;
+			sourceTree = "<group>";
+		};
+		54AD48DF196855F40088D4F4 /* Podcast */ = {
+			isa = PBXGroup;
+			children = (
+				542300C9192C55F100830A4C /* rcfPodcastTableViewController.h */,
+				542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */,
+				542300D2192DD11F00830A4C /* rcfPodcastTableViewCell.h */,
+				542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */,
+				5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */,
+				5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */,
+			);
+			name = Podcast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,12 +354,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				542300D4192DD11F00830A4C /* rcfPodcastTableViewCell.m in Sources */,
+				54AD48D41967BB5E0088D4F4 /* rcfBlogTableViewController.m in Sources */,
+				54AD48DA1967C68F0088D4F4 /* rcfBlogDetailView.m in Sources */,
+				54AD48DD1967C9810088D4F4 /* rcfBlog.m in Sources */,
 				542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */,
+				54AD48D71967BEA40088D4F4 /* rcfBlogTableViewCell.m in Sources */,
 				54230099192C393200830A4C /* rcfAppDelegate.m in Sources */,
 				54230095192C393200830A4C /* main.m in Sources */,
 				54D096311961C398005F8CC6 /* OBSlider.m in Sources */,
 				542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */,
 				542300CB192C55F100830A4C /* rcfPodcastTableViewController.m in Sources */,
+				54AD48CF1967AEC00088D4F4 /* rcfBlogParseOperation.m in Sources */,
 				5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */,
 				542300A5192C393200830A4C /* rcfViewController.m in Sources */,
 			);

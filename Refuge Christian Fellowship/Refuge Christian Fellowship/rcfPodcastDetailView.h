@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *playpausebtn;
 @property (strong, nonatomic) AVPlayer *audioPlayer;
 @property (nonatomic) NSTimer *playbackTimer;
+@property (weak, nonatomic) IBOutlet UILabel *loading;
 @property (nonatomic) NSMutableDictionary *songInfo;
 //-(void)initWithPodcast:(rcfPodcast *)podcast;
 

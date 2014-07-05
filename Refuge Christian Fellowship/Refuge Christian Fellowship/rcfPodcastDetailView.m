@@ -16,7 +16,8 @@
 - (void) viewDidLoad{
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:100];
+//    self.view.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:100];
+    
     
     self.podcastTitle.text = self.podcast.title;
     self.podcastSubtitle.text = self.podcast.subtitle;
@@ -26,6 +27,8 @@
     //Hide the time because it won't be correct
     self.elapsedTime.hidden = YES;
     self.totalTime.hidden = YES;
+    self.playerSlider.hidden = YES;
+    self.loading.hidden = NO;
     
     [self.playpausebtn addTarget:self action:@selector(didPressPlay:) forControlEvents:UIControlEventTouchUpInside];
     [self.audioPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
@@ -88,7 +91,9 @@
             NSLog(@"AVPlayer Failed");
         } else if (self.audioPlayer.status == AVPlayerStatusReadyToPlay) {
             NSLog(@"AVPlayer Ready to Play");
+            self.loading.hidden = YES;
             [self.audioPlayer play];
+            self.playerSlider.hidden = NO;
             self.playbackTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                                                   target:self
                                                                 selector:@selector(updateTime:)
