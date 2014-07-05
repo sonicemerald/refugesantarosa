@@ -24,6 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.bounces = NO;
     self.BlogList = [NSMutableArray array];
     
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -170,6 +171,13 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         rcfBlogDetailView *controller = [segue destinationViewController];
         controller.Blog = [self.BlogList objectAtIndex:myIndexPath.row];
+        
+//        controller.webview.delegate = controller;
+//        controller.webview.scalesPageToFit = YES;
+//        NSURL* url = [NSURL URLWithString:controller.blog.link];
+//        NSURLRequest* request = [NSURLRequest requestWithURL:url];
+//        [controller.webview loadRequest:request];
+
     }
     
 }

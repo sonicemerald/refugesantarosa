@@ -8,8 +8,9 @@
 
 #import "rcfBlog.h"
 
-@interface rcfBlogDetailView : UIViewController
+@interface rcfBlogDetailView : UIViewController <UIWebViewDelegate>
 
 @property (nonatomic) rcfBlog *blog;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
+@property (nonatomic) UIActivityIndicatorView *activityIndicatorObject;
 @end

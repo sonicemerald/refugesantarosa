@@ -24,6 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.bounces = NO;
     self.podcastList = [NSMutableArray array];
 
     self.tableView.backgroundColor = [UIColor whiteColor];
