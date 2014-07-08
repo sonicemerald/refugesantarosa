@@ -14,9 +14,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *downloadButton;
 
 
+@property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressIndicator;
-@property (nonatomic) int currentlyDownloading;
--(void)setTheProgressIndicator:(double)currentProgress;
+
+-(void)setTheProgressIndicator:(double)currentProgress with:(NSInteger) currentlyDownloading;
 -(void)configureWithPodcast:(rcfPodcast *)podcast;
 
-@end
+@end 

@@ -25,6 +25,9 @@
     self.episodeSubtitle.text = podcast.subtitle;
     self.episodeDate.text = podcast.date;
     self.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f];
+    self.testLabel.text = [NSString stringWithFormat:@"%ld", (long)self.tag];
+    [self.downloadButton setTitle:@"Download" forState:UIControlStateNormal];
+    
     
 }
 
@@ -51,11 +54,11 @@
 }
 
 
--(void)setTheProgressIndicator:(double)currentProgress{
-    NSLog(@"tag, %d", self.tag);
-    if(self.tag == self.currentlyDownloading){
+-(void)setTheProgressIndicator:(double)currentProgress with:(NSInteger) currentlyDownloading{
+    if(self.tag == currentlyDownloading){
         self.progressIndicator.hidden = NO;
         self.progressIndicator.progress = currentProgress;
+        
     }
 }
 @end

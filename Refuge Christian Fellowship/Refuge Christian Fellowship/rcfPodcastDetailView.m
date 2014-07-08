@@ -45,8 +45,26 @@
     
 }
 - (void) viewWillAppear:(BOOL)animated{
+    
+    NSString *file = self.podcast.guidlink;
+    NSLog(@"%@", file);
+    file = [file stringByReplacingOccurrencesOfString:@"http://www.podtrac.com/pts/redirect.mp3/www.refugecf.com/podcast/" withString:@"podcasts/"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"/podcasts"];
+    NSError *error;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", documentsDirectory, file]];
     NSURL *urlStream = [NSURL URLWithString:self.podcast.guidlink];
-    AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:urlStream];
+    if([[NSFileManager defaultManager] fileExistsAtPath:file]){
+        self.item = [[AVPlayerItem alloc] initWithURL:url];
+        NSLog(@"using file on device");
+    } else {
+        self.item = [[AVPlayerItem alloc] initWithURL:urlStream];
+    }
+
     if(self.audioPlayer.currentItem) { //if another episode is playing...
         AVURLAsset *currURL = (AVURLAsset *)[self.audioPlayer.currentItem asset];
         AVURLAsset *pendingURL = [AVURLAsset URLAssetWithURL:urlStream options:nil];
@@ -54,7 +72,7 @@
             //New episode, pause old one, replace, play and start timer
             [self.audioPlayer pause];
             NSLog(@"pausing audioPlayer, %@, to change what is playing", self.audioPlayer);
-            [self.audioPlayer replaceCurrentItemWithPlayerItem:item];
+            [self.audioPlayer replaceCurrentItemWithPlayerItem:self.item];
             [self.audioPlayer play];
             self.playbackTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                                                   target:self
@@ -63,7 +81,7 @@
                                                                  repeats:YES];
         }
     } else {
-            self.audioPlayer = [self.audioPlayer initWithPlayerItem:item];
+            self.audioPlayer = [self.audioPlayer initWithPlayerItem:self.item];
             //wait for status to be "ready to play" to play.
     }
     

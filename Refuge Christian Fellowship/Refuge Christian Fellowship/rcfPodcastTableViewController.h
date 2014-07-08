@@ -12,5 +12,6 @@
 @interface rcfPodcastTableViewController : UITableViewController <NSURLSessionDownloadDelegate>
 @property (strong, nonatomic) NSURLSessionDownloadTask *backgroundTask;
 @property (strong, nonatomic, readonly) NSURLSession *backgroundSession;
+@property (nonatomic) NSInteger currentlyDownloading;
 @property (strong, nonatomic) AVPlayer *audioPlayer;
 @end

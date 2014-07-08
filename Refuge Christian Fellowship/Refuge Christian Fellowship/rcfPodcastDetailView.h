@@ -31,6 +31,7 @@
 @property (nonatomic) NSTimer *playbackTimer;
 @property (weak, nonatomic) IBOutlet UILabel *loading;
 @property (nonatomic) NSMutableDictionary *songInfo;
+@property (nonatomic) AVPlayerItem *item;
 //-(void)initWithPodcast:(rcfPodcast *)podcast;
 
 @end

@@ -22,7 +22,7 @@
 @property (nonatomic) rcfPodcast *podcast;
 @property (nonatomic) NSMutableArray *podcastList;
 @property (nonatomic) NSOperationQueue *parseQuene;
-
+@property (nonatomic) NSIndexPath *indexpath;
 @property (strong, nonatomic) NSURLSessionDownloadTask *resumableTask;
 @end
 
@@ -39,6 +39,7 @@
      setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
 
     self.backgroundSession.sessionDescription = @"BackgroundSession";
+    self.currentlyDownloading = 99999;
     /*
      Use NSURLConnection to asynchronously download the data. This means the main thread will not be blocked - the application will remain responsive to the user.
      
@@ -159,7 +160,7 @@
     rcfPodcast *podcast = [self.podcastList objectAtIndex:indexPath.row];
     NSLog(@"Podcast being populated: %@", podcast);
     
-    //set up downloadButton
+    //set up downloadButtonimage
 //    [imageview setUserInteractionEnabled:YES];
 //    UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapping:)];
 //    [singleTap setNumberOfTapsRequired:1];
@@ -168,9 +169,14 @@
     [cell.downloadButton addTarget:self action:@selector(downloadItem:) forControlEvents:UIControlEventTouchUpInside];
     [cell setTag:indexPath.row];
     [cell.downloadButton setTag:indexPath.row];
-    NSLog(@"cellTag: %d : downloadbtn: %d", cell.tag, cell.downloadButton.tag);
+    NSLog(@"cellTag: %ld : downloadbtn: %ld", (long)cell.tag, (long)cell.downloadButton.tag);
     cell.progressIndicator.hidden = YES;
     [cell configureWithPodcast:podcast];
+    
+    if(cell.tag == self.currentlyDownloading){
+        cell.progressIndicator.hidden = NO;
+        [cell.downloadButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    }
     return cell;
 }
 
@@ -216,17 +222,31 @@
 - (void)downloadItem:(UITapGestureRecognizer *) sender{
     
     UIButton *button = (UIButton *)sender;
-    NSLog(@"tag %ld",(long)button.tag);
+    NSLog(@"the tag clicked %ld",(long)button.tag);
+//    button.titleLabel.text = @"Downloading...";
     rcfPodcast *podcast = [self.podcastList objectAtIndex:button.tag];
     NSString *url = podcast.guidlink;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    self.backgroundTask = [self.backgroundSession downloadTaskWithRequest:request];
     
-    cell.currentlyDownloading = button.tag;
+    if(self.backgroundTask){
+        [self.backgroundTask cancel];
+        self.backgroundTask = nil;
+        [button setTitle:@"Download" forState:UIControlStateNormal];
+        return;
+    }
+    self.backgroundTask = [self.backgroundSession downloadTaskWithRequest:request];
+    self.currentlyDownloading = button.tag;
     
     // Start the download
     [self.backgroundTask resume];
+
     
+    self.indexpath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    rcfPodcastTableViewCell *acell = (rcfPodcastTableViewCell *)[self.tableView cellForRowAtIndexPath:self.indexpath];
+    NSArray *aArray = [NSArray arrayWithObject:self.indexpath];
+    acell.downloadButton.titleLabel.text = @"...";
+    [self.tableView reloadRowsAtIndexPaths:aArray withRowAnimation:UITableViewRowAnimationFade];
+
 }
 
 - (NSURLSession *)backgroundSession
@@ -246,7 +266,8 @@
 {
     double currentProgress = totalBytesWritten / (double)totalBytesExpectedToWrite;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [cell setTheProgressIndicator:(double)currentProgress];
+        [cell setTheProgressIndicator:(double)currentProgress with:self.currentlyDownloading];
+        NSLog(@"tag currently... %ld", (long)self.currentlyDownloading);
         NSLog(@"downloading byte %f of %lld", currentProgress, totalBytesExpectedToWrite);
     });
 }
@@ -266,6 +287,7 @@
     
     NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:[location lastPathComponent]];
     NSError *error;
+    NSLog(@"DestinationPath=%@", destinationPath);
     
     // Make sure we overwrite anything that's already there
     [fileManager removeItemAtURL:destinationPath error:NULL];
@@ -275,7 +297,7 @@
     {
         NSLog(@"finished downloading: %@", location);
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIImage *image = [UIImage imageWithContentsOfFile:[destinationPath path]];
+            NSLog(@"%@", [destinationPath path]);
         });
     }
     else

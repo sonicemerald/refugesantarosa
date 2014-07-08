@@ -38,6 +38,15 @@
                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <progressView appearanceType="aqua" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="x5r-Gb-eNA">
+                                            <rect key="frame" x="213" y="48" width="69" height="2"/>
+                                        </progressView>
+                                        <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KjQ-VN-xhd">
+                                            <rect key="frame" x="240" y="0.0" width="42" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ck6-w0-hWb">
                                             <rect key="frame" x="20" y="0.0" width="211" height="23"/>
                                             <accessibility key="accessibilityConfiguration">
@@ -47,23 +56,21 @@
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <progressView appearanceType="aqua" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="x5r-Gb-eNA">
-                                            <rect key="frame" x="213" y="48" width="69" height="2"/>
-                                        </progressView>
-                                        <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFY-kE-WSS">
+                                        <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opk-be-dRn">
                                             <rect key="frame" x="213" y="19" width="69" height="30"/>
-                                            <state key="normal" title="Download">
+                                            <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="downloadButton" destination="uFY-kE-WSS" id="KrP-ro-4FI"/>
+                                    <outlet property="downloadButton" destination="Opk-be-dRn" id="xl6-i4-x7P"/>
                                     <outlet property="episodeDate" destination="8OQ-d7-Rzy" id="KWs-F6-Efo"/>
                                     <outlet property="episodeSubtitle" destination="dFC-9e-gtU" id="P3n-l9-cH0"/>
                                     <outlet property="episodeTitle" destination="ck6-w0-hWb" id="zV1-4J-s73"/>
                                     <outlet property="progressIndicator" destination="x5r-Gb-eNA" id="PN6-fm-qO2"/>
+                                    <outlet property="testLabel" destination="KjQ-VN-xhd" id="bXQ-nm-YjN"/>
                                     <segue destination="CZ4-MO-1fc" kind="push" identifier="PodcastList2Detail" id="DRu-zW-I72"/>
                                 </connections>
                             </tableViewCell>
