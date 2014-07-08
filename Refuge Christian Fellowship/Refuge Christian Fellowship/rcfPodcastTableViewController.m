@@ -6,17 +6,24 @@
 //  Copyright (c) 2014 RefugeCF. All rights reserved.
 //
 
+#import "rcfAppDelegate.h"
 #import "rcfPodcastTableViewController.h"
 #import "rcfPodcastTableViewCell.h"
 #import "rcfPodcast.h"
 #import "rcfPodcastParseOperation.h"
 #import "rcfPodcastDetailView.h"
 
-@interface rcfPodcastTableViewController ()
+@interface rcfPodcastTableViewController () {
+    NSURLSession *inProcessSession;
+    NSURLSessionDownloadTask *cancellableTask;
+    NSData *partialDownload;
+    rcfPodcastTableViewCell *cell;
+}
 @property (nonatomic) rcfPodcast *podcast;
 @property (nonatomic) NSMutableArray *podcastList;
 @property (nonatomic) NSOperationQueue *parseQuene;
 
+@property (strong, nonatomic) NSURLSessionDownloadTask *resumableTask;
 @end
 
 @implementation rcfPodcastTableViewController
@@ -31,7 +38,7 @@
     [[UIView appearanceWhenContainedIn:[UITabBar class], nil]
      setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
 
-    
+    self.backgroundSession.sessionDescription = @"BackgroundSession";
     /*
      Use NSURLConnection to asynchronously download the data. This means the main thread will not be blocked - the application will remain responsive to the user.
      
@@ -145,14 +152,24 @@
     // for the cell I need the title, author, and date.
     static NSString *cellDQ = @"DQ";
     
-    rcfPodcastTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellDQ forIndexPath:indexPath];
+    cell = [tableView dequeueReusableCellWithIdentifier:cellDQ forIndexPath:indexPath];
     // Configure the cell...
     
     //get specefic podcast
     rcfPodcast *podcast = [self.podcastList objectAtIndex:indexPath.row];
-//    rcfPodcast *podcast = (self.podcastList)[indexPath.row];
     NSLog(@"Podcast being populated: %@", podcast);
     
+    //set up downloadButton
+//    [imageview setUserInteractionEnabled:YES];
+//    UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapping:)];
+//    [singleTap setNumberOfTapsRequired:1];
+//    [imageview addGestureRecognizer:singleTap];
+    
+    [cell.downloadButton addTarget:self action:@selector(downloadItem:) forControlEvents:UIControlEventTouchUpInside];
+    [cell setTag:indexPath.row];
+    [cell.downloadButton setTag:indexPath.row];
+    NSLog(@"cellTag: %d : downloadbtn: %d", cell.tag, cell.downloadButton.tag);
+    cell.progressIndicator.hidden = YES;
     [cell configureWithPodcast:podcast];
     return cell;
 }
@@ -174,29 +191,8 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         rcfPodcastDetailView *controller = [segue destinationViewController];
         controller.podcast = [self.podcastList objectAtIndex:myIndexPath.row];
-//        NSURL *urltostream = [NSURL URLWithString:[[self.podcastList objectAtIndex:myIndexPath.row] guidlink]];
-      //  controller.audioPlayer = [[AVPlayer alloc] init];
-
         controller.audioPlayer = self.audioPlayer;
         NSLog(@"sending audioPlayer, %@, to detailView", self.audioPlayer);
-        
-//        //Check to see if audio is not playing first.
-//        NSURL *urlStream = [NSURL URLWithString:controller.podcast.guidlink];
-//        AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:urlStream];
-//        if([self.audioPlayer rate] == 0.0){
-//            self.audioPlayer = [self.audioPlayer initWithPlayerItem:item];
-//        } else { //if another episode is playing...
-//            AVURLAsset *currURL = (AVURLAsset *)[self.audioPlayer.currentItem asset];
-//            AVURLAsset *pendingURL = [AVURLAsset URLAssetWithURL:urlStream options:nil];
-//            
-//            if (![currURL.URL isEqual: pendingURL.URL]) {
-//                [self.audioPlayer pause];
-//                NSLog(@"pausing audioPlayer, %@, to set up new one", self.audioPlayer);
-//                [self.audioPlayer replaceCurrentItemWithPlayerItem:item];
-//                NSLog(@"new detailView audioPlayer, %@, after pausing old one", self.audioPlayer);
-//                //[self.audioPlayerplay];
-//            }}
-        
             
     }
 
@@ -207,26 +203,112 @@
     return 1;
 }
 
-//- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    if( section == 0 )
-//        return 65;
-//    return 45;
-//}
-//
-//- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    NSString *text = @"Podcasts";
-//    return text;
-//}
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
+
+- (void)downloadItem:(UITapGestureRecognizer *) sender{
+    
+    UIButton *button = (UIButton *)sender;
+    NSLog(@"tag %ld",(long)button.tag);
+    rcfPodcast *podcast = [self.podcastList objectAtIndex:button.tag];
+    NSString *url = podcast.guidlink;
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    self.backgroundTask = [self.backgroundSession downloadTaskWithRequest:request];
+    
+    cell.currentlyDownloading = button.tag;
+    
+    // Start the download
+    [self.backgroundTask resume];
+    
+}
+
+- (NSURLSession *)backgroundSession
+{
+    static NSURLSession *backgroundSession = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.micahgemmell.rcf.Refuge Christian Fellowship.BackgroundSession"];
+        
+        backgroundSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+    });
+    return backgroundSession;
+}
+
+#pragma mark - NSURLSessionDownloadDelegate methods
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+{
+    double currentProgress = totalBytesWritten / (double)totalBytesExpectedToWrite;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [cell setTheProgressIndicator:(double)currentProgress];
+        NSLog(@"downloading byte %f of %lld", currentProgress, totalBytesExpectedToWrite);
+    });
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes
+{
+    // Leave this for now
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
+{
+    // We've successfully finished the download. Let's save the file
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentsDirectory = URLs[0];
+    
+    NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:[location lastPathComponent]];
+    NSError *error;
+    
+    // Make sure we overwrite anything that's already there
+    [fileManager removeItemAtURL:destinationPath error:NULL];
+    BOOL success = [fileManager copyItemAtURL:location toURL:destinationPath error:&error];
+    
+    if (success)
+    {
+        NSLog(@"finished downloading: %@", location);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithContentsOfFile:[destinationPath path]];
+        });
+    }
+    else
+    {
+        NSLog(@"Couldn't copy the downloaded file");
+    }
+    
+    if(downloadTask == cancellableTask) {
+        cancellableTask = nil;
+    } else if (downloadTask == self.resumableTask) {
+        self.resumableTask = nil;
+        partialDownload = nil;
+    } else if (session == self.backgroundSession) {
+        self.backgroundTask = nil;
+        // Get hold of the app delegate
+        
+        rcfAppDelegate *appDelegate = (rcfAppDelegate *)[[UIApplication sharedApplication] delegate];
+        if(appDelegate.backgroundURLSessionCompletionHandler) {
+            // Need to copy the completion handler
+            void (^handler)() = appDelegate.backgroundURLSessionCompletionHandler;
+            appDelegate.backgroundURLSessionCompletionHandler = nil;
+            handler();
+        }
+    }
+    
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        cell.progressIndicator.hidden = YES;
+    });
+}
 
 /*
 // Override to support conditional editing of the table view.

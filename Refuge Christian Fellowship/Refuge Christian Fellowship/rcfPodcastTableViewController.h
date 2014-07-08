@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface rcfPodcastTableViewController : UITableViewController
+@interface rcfPodcastTableViewController : UITableViewController <NSURLSessionDownloadDelegate>
+@property (strong, nonatomic) NSURLSessionDownloadTask *backgroundTask;
+@property (strong, nonatomic, readonly) NSURLSession *backgroundSession;
 @property (strong, nonatomic) AVPlayer *audioPlayer;
 @end

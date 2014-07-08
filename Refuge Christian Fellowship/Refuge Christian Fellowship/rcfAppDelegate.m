@@ -28,12 +28,9 @@
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setTranslucent:NO];
 
-    //Selected Tab is dark gray
-    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:68/255.0f green:68/255.0f blue:68/255.0f alpha:1.0f]];
+    //Selected Tab is teal
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
     
-    //Non-selected tab is teal, when first loaded.
-    [[UIView appearanceWhenContainedIn:[UITabBar class], nil]
-     setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
     
     
     [[UITabBarItem appearance] setTitleTextAttributes:
@@ -84,6 +81,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
+{
+    self.backgroundURLSessionCompletionHandler = completionHandler;
 }
 
 @end

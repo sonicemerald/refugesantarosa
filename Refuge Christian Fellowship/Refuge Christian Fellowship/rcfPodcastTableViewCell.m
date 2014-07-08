@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *episodeTitle;
 @property (weak, nonatomic) IBOutlet UILabel *episodeSubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *episodeDate;
-@property (weak, nonatomic) IBOutlet UIImageView *episodePicture;
+
 @end
 
 @implementation rcfPodcastTableViewCell
@@ -24,8 +24,8 @@
  //   self.episodeTitle.textColor = [UICOLor ]
     self.episodeSubtitle.text = podcast.subtitle;
     self.episodeDate.text = podcast.date;
-    
     self.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f];
+    
 }
 
 
@@ -50,4 +50,12 @@
     // Configure the view for the selected state
 }
 
+
+-(void)setTheProgressIndicator:(double)currentProgress{
+    NSLog(@"tag, %d", self.tag);
+    if(self.tag == self.currentlyDownloading){
+        self.progressIndicator.hidden = NO;
+        self.progressIndicator.progress = currentProgress;
+    }
+}
 @end

@@ -11,5 +11,12 @@
 @class rcfPodcast;
 
 @interface rcfPodcastTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton;
+
+
+@property (weak, nonatomic) IBOutlet UIProgressView *progressIndicator;
+@property (nonatomic) int currentlyDownloading;
+-(void)setTheProgressIndicator:(double)currentProgress;
 -(void)configureWithPodcast:(rcfPodcast *)podcast;
+
 @end

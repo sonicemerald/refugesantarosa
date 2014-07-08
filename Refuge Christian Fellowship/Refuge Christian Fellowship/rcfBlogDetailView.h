@@ -11,6 +11,6 @@
 @interface rcfBlogDetailView : UIViewController <UIWebViewDelegate>
 
 @property (nonatomic) rcfBlog *blog;
-@property (weak, nonatomic) IBOutlet UIWebView *webview;
+@property (nonatomic) UIWebView *webview;
 @property (nonatomic) UIActivityIndicatorView *activityIndicatorObject;
 @end

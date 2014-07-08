@@ -26,6 +26,7 @@
 		542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300CD192C6C1F00830A4C /* rcfPodcast.m */; };
 		542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D0192D600800830A4C /* rcfPodcastParseOperation.m */; };
 		542300D4192DD11F00830A4C /* rcfPodcastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */; };
+		5442479F196B73880087C259 /* download-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 5442479E196B73880087C259 /* download-128.png */; };
 		5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */; };
 		54AD48CF1967AEC00088D4F4 /* rcfBlogParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */; };
 		54AD48D41967BB5E0088D4F4 /* rcfBlogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48D31967BB5E0088D4F4 /* rcfBlogTableViewController.m */; };
@@ -75,6 +76,7 @@
 		542300D0192D600800830A4C /* rcfPodcastParseOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastParseOperation.m; sourceTree = "<group>"; };
 		542300D2192DD11F00830A4C /* rcfPodcastTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastTableViewCell.h; sourceTree = "<group>"; };
 		542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastTableViewCell.m; sourceTree = "<group>"; };
+		5442479E196B73880087C259 /* download-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download-128.png"; sourceTree = "<group>"; };
 		5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastDetailView.h; sourceTree = "<group>"; };
 		5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastDetailView.m; sourceTree = "<group>"; };
 		54AD48CD1967AEC00088D4F4 /* rcfBlogParseOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfBlogParseOperation.h; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		5423007C192C393200830A4C = {
 			isa = PBXGroup;
 			children = (
+				5442479E196B73880087C259 /* download-128.png */,
 				5423008E192C393200830A4C /* Refuge Christian Fellowship */,
 				542300B3192C393200830A4C /* Refuge Christian FellowshipTests */,
 				54230087192C393200830A4C /* Frameworks */,
@@ -334,6 +337,7 @@
 				5423009F192C393200830A4C /* Main_iPad.storyboard in Resources */,
 				542300A7192C393200830A4C /* Images.xcassets in Resources */,
 				5423009C192C393200830A4C /* Main_iPhone.storyboard in Resources */,
+				5442479F196B73880087C259 /* download-128.png in Resources */,
 				54230093192C393200830A4C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
