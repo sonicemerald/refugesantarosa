@@ -24,6 +24,7 @@
 @property (nonatomic) NSOperationQueue *parseQuene;
 @property (nonatomic) NSIndexPath *indexpath;
 @property (strong, nonatomic) NSURLSessionDownloadTask *resumableTask;
+@property (nonatomic) NSString *downloadingItem;
 @end
 
 @implementation rcfPodcastTableViewController
@@ -170,6 +171,7 @@
     [cell setTag:indexPath.row];
     [cell.downloadButton setTag:indexPath.row];
     NSLog(@"cellTag: %ld : downloadbtn: %ld", (long)cell.tag, (long)cell.downloadButton.tag);
+    cell.progressIndicator.progress = 0;
     cell.progressIndicator.hidden = YES;
     [cell configureWithPodcast:podcast];
     
@@ -225,8 +227,8 @@
     NSLog(@"the tag clicked %ld",(long)button.tag);
 //    button.titleLabel.text = @"Downloading...";
     rcfPodcast *podcast = [self.podcastList objectAtIndex:button.tag];
-    NSString *url = podcast.guidlink;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    self.downloadingItem = podcast.guidlink;
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.downloadingItem]];
     
     if(self.backgroundTask){
         [self.backgroundTask cancel];
@@ -234,6 +236,7 @@
         [button setTitle:@"Download" forState:UIControlStateNormal];
         return;
     }
+    
     self.backgroundTask = [self.backgroundSession downloadTaskWithRequest:request];
     self.currentlyDownloading = button.tag;
     
@@ -279,15 +282,32 @@
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
 {
-    // We've successfully finished the download. Let's save the file
+    // We've successfully finished the download. Let's save the filex
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
+    NSError *error;
     NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *documentsDirectory = URLs[0];
+
+    NSURL *dp = [documentsDirectory URLByAppendingPathComponent:@"podcasts"];
+    NSString *dataPath = [NSString stringWithFormat:@"%@", dp];
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
     
-    NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:[location lastPathComponent]];
-    NSError *error;
+    NSURL *url = [NSURL URLWithString:self.downloadingItem];
+    // full path refuge.com/somefiles.mp3
+    //then i need to add /podcasts before the lastPathComponent.
+    // and it needs to be a url
+    
+    
+    NSString *fullPath = @"/podcasts/";
+    fullPath = [fullPath stringByAppendingPathComponent:[url lastPathComponent]];
+    
+    
+    NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:fullPath];
     NSLog(@"DestinationPath=%@", destinationPath);
+    
+    
     
     // Make sure we overwrite anything that's already there
     [fileManager removeItemAtURL:destinationPath error:NULL];

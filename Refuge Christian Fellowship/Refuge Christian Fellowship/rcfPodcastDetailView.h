@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *loading;
 @property (nonatomic) NSMutableDictionary *songInfo;
 @property (nonatomic) AVPlayerItem *item;
+@property (nonatomic) BOOL cantplay;
 //-(void)initWithPodcast:(rcfPodcast *)podcast;
 
 @end

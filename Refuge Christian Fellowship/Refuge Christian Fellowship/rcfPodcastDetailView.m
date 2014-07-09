@@ -29,6 +29,7 @@
     self.totalTime.hidden = YES;
     self.playerSlider.hidden = YES;
     self.loading.hidden = NO;
+    self.cantplay = NO;
     
     [self.playpausebtn addTarget:self action:@selector(didPressPlay:) forControlEvents:UIControlEventTouchUpInside];
     [self.audioPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
@@ -58,13 +59,15 @@
     
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", documentsDirectory, file]];
     NSURL *urlStream = [NSURL URLWithString:self.podcast.guidlink];
-    if([[NSFileManager defaultManager] fileExistsAtPath:file]){
-        self.item = [[AVPlayerItem alloc] initWithURL:url];
-        NSLog(@"using file on device");
-    } else {
-        self.item = [[AVPlayerItem alloc] initWithURL:urlStream];
-    }
+    NSLog(@"%@", url);
+    NSString *N = [NSString stringWithFormat:@"%@", url];
+    NSLog(@"N=%@", N);
+    
 
+    self.item = [[AVPlayerItem alloc] initWithURL:url];
+    if(self.item.duration.value == CMTimeMake(0, 0).value)
+        self.item = [[AVPlayerItem alloc] initWithURL:urlStream];
+        
     if(self.audioPlayer.currentItem) { //if another episode is playing...
         AVURLAsset *currURL = (AVURLAsset *)[self.audioPlayer.currentItem asset];
         AVURLAsset *pendingURL = [AVURLAsset URLAssetWithURL:urlStream options:nil];
