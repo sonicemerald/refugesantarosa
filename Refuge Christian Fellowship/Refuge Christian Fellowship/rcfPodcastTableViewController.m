@@ -156,11 +156,11 @@
     
     cell = [tableView dequeueReusableCellWithIdentifier:cellDQ forIndexPath:indexPath];
     // Configure the cell...
-    
+
     //get specefic podcast
     rcfPodcast *podcast = [self.podcastList objectAtIndex:indexPath.row];
-    NSLog(@"Podcast being populated: %@", podcast);
-    
+    //NSLog(@"Podcast being populated: %@", podcast);
+
     //set up downloadButtonimage
 //    [imageview setUserInteractionEnabled:YES];
 //    UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapping:)];
@@ -168,11 +168,14 @@
 //    [imageview addGestureRecognizer:singleTap];
     
     [cell.downloadButton addTarget:self action:@selector(downloadItem:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteButton addTarget:self action:@selector(deleteItem:) forControlEvents:UIControlEventTouchUpInside];
     [cell setTag:indexPath.row];
     [cell.downloadButton setTag:indexPath.row];
+    [cell.deleteButton setTag:indexPath.row];
     NSLog(@"cellTag: %ld : downloadbtn: %ld", (long)cell.tag, (long)cell.downloadButton.tag);
     cell.progressIndicator.progress = 0;
     cell.progressIndicator.hidden = YES;
+    //this is when cell loads
     [cell configureWithPodcast:podcast];
     
     if(cell.tag == self.currentlyDownloading){
@@ -191,7 +194,6 @@
 //    [detailView initWithPodcast:podcast];
   //  [self.navigationController pushViewController:detailView animated:YES];
 }
-
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"PodcastList2Detail"])
@@ -217,10 +219,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
-
-
+- (void)deleteItem:(UITapGestureRecognizer *) sender{
+    UIButton *button = (UIButton *)sender;
+    
+    NSString *file =
+    [[self.podcastList objectAtIndex:button.tag] guidlink];
+    file = [file stringByReplacingOccurrencesOfString:@"http://www.podtrac.com/pts/redirect.mp3/www.refugecf.com/podcast/" withString:@"podcasts/"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+    NSError *error;
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", documentsDirectory, file]];
+    NSString *urlPATH = [url path];
+    urlPATH = [urlPATH stringByRemovingPercentEncoding];
+    [[NSFileManager defaultManager] removeItemAtPath:urlPATH error:&error];
+    
+    NSIndexPath *n = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:n] withRowAnimation:UITableViewRowAnimationFade];
+    NSLog(@"removed item at path.");
+    
+}
 - (void)downloadItem:(UITapGestureRecognizer *) sender{
     
     UIButton *button = (UIButton *)sender;
@@ -243,15 +260,20 @@
     // Start the download
     [self.backgroundTask resume];
 
+    NSIndexPath *n = [NSIndexPath indexPathForRow:self.currentlyDownloading inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:n] withRowAnimation:UITableViewRowAnimationFade];
     
-    self.indexpath = [NSIndexPath indexPathForRow:button.tag inSection:0];
-    rcfPodcastTableViewCell *acell = (rcfPodcastTableViewCell *)[self.tableView cellForRowAtIndexPath:self.indexpath];
-    NSArray *aArray = [NSArray arrayWithObject:self.indexpath];
-    acell.downloadButton.titleLabel.text = @"...";
-    [self.tableView reloadRowsAtIndexPaths:aArray withRowAnimation:UITableViewRowAnimationFade];
+//    
+//    
+//    self.indexpath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+//    rcfPodcastTableViewCell *acell = (rcfPodcastTableViewCell *)[self.tableView cellForRowAtIndexPath:self.currentlyDownloading];
+//    NSArray *aArray = [NSArray arrayWithObject:self.currentlyDownloading];
+//    acell.downloadButton.titleLabel.text = @"...";
+//    [self.tableView reloadRowsAtIndexPaths:aArray withRowAnimation:UITableViewRowAnimationFade];
 
 }
 
+//Code for downloading the podcast episode.
 - (NSURLSession *)backgroundSession
 {
     static NSURLSession *backgroundSession = nil;
@@ -295,11 +317,7 @@
         [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
     
     NSURL *url = [NSURL URLWithString:self.downloadingItem];
-    // full path refuge.com/somefiles.mp3
-    //then i need to add /podcasts before the lastPathComponent.
-    // and it needs to be a url
-    
-    
+
     NSString *fullPath = @"/podcasts/";
     fullPath = [fullPath stringByAppendingPathComponent:[url lastPathComponent]];
     
@@ -318,6 +336,11 @@
         NSLog(@"finished downloading: %@", location);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"%@", [destinationPath path]);
+            cell.deleteButton.hidden = NO;
+            cell.downloadButton.hidden = YES;
+            cell.progressIndicator.hidden = YES;
+            self.currentlyDownloading = 99999;
+            NSLog(@"Download complete, hiding cell progress indicator");
         });
     }
     else
@@ -348,9 +371,9 @@
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        cell.progressIndicator.hidden = YES;
     });
 }
+//End download code
 
 /*
 // Override to support conditional editing of the table view.

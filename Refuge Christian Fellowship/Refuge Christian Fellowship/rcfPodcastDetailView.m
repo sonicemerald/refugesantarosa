@@ -18,10 +18,11 @@
     
 //    self.view.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:100];
     
-    
+    self.playerSlider.thumbTintColor = [UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f];
     self.podcastTitle.text = self.podcast.title;
     self.podcastSubtitle.text = self.podcast.subtitle;
     self.podcastDate.text = self.podcast.date;
+    self.podcastAuthor.text = self.podcast.author;
     [self.podcastSummary loadHTMLString:self.podcast.summary baseURL:nil];
     
     //Hide the time because it won't be correct
@@ -31,6 +32,7 @@
     self.loading.hidden = NO;
     self.cantplay = NO;
     
+    [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
     [self.playpausebtn addTarget:self action:@selector(didPressPlay:) forControlEvents:UIControlEventTouchUpInside];
     [self.audioPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
     NSError *setCategoryError = nil;
@@ -57,18 +59,25 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
         [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
     
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", documentsDirectory, file]];
+    NSString *urlPATH = [NSString stringWithFormat:@"%@/%@", documentsDirectory, file];
+    NSURL *localURL = [NSURL fileURLWithPath:urlPATH];
+    NSString *u = [localURL path];
+    u = [u stringByRemovingPercentEncoding];
+    localURL = [NSURL fileURLWithPath:u];
     NSURL *urlStream = [NSURL URLWithString:self.podcast.guidlink];
-    NSLog(@"%@", url);
-    NSString *N = [NSString stringWithFormat:@"%@", url];
-    NSLog(@"N=%@", N);
     
-
-    self.item = [[AVPlayerItem alloc] initWithURL:url];
-    if(self.item.duration.value == CMTimeMake(0, 0).value)
+    self.item = [[AVPlayerItem alloc] initWithURL:localURL];
+//    NSLog(@"self.item %@", self.item.asset);
+//    NSLog(@"self.item %lld", self.item.duration.value);
+//    NSLog(@"playable: %d", self.item.asset.playable);
+    if(!self.item.asset.playable){
+//    if(self.item.duration.value == CMTimeMake(0, 0).value){
+        NSLog(@"using stream");
         self.item = [[AVPlayerItem alloc] initWithURL:urlStream];
-        
+    }
+    [self.audioPlayer.currentItem addObserver:self forKeyPath:@"status" options:0 context:nil];
     if(self.audioPlayer.currentItem) { //if another episode is playing...
+        [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
         AVURLAsset *currURL = (AVURLAsset *)[self.audioPlayer.currentItem asset];
         AVURLAsset *pendingURL = [AVURLAsset URLAssetWithURL:urlStream options:nil];
         if (![currURL.URL isEqual: pendingURL.URL]) {
@@ -76,12 +85,14 @@
             [self.audioPlayer pause];
             NSLog(@"pausing audioPlayer, %@, to change what is playing", self.audioPlayer);
             [self.audioPlayer replaceCurrentItemWithPlayerItem:self.item];
+            self.loading.hidden = YES;
             [self.audioPlayer play];
             self.playbackTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                                                   target:self
                                                                 selector:@selector(updateTime:)
                                                                 userInfo:nil
                                                                  repeats:YES];
+            self.playerSlider.hidden = NO;
         }
     } else {
             self.audioPlayer = [self.audioPlayer initWithPlayerItem:self.item];
@@ -125,6 +136,7 @@
             NSLog(@"AVPlayer Unknown");
         }
     }
+
 }
 
 /* UI CONTROLS (in order they appear)*/
@@ -276,9 +288,11 @@
 - (void)didPressPlay:(UITapGestureRecognizer *) sender{
     if([self.audioPlayer rate] == 0.0){
         [self.audioPlayer play];
+        [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
         NSLog(@"Playing audio");
     } else {
         [self.audioPlayer pause];
+        [self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
         NSLog(@"Pausing audio");
     }
 }
@@ -303,15 +317,19 @@
         switch (receivedEvent.subtype) {
             case UIEventSubtypeRemoteControlPlay:
                 [self.audioPlayer play];
+                [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
                 break;
             case UIEventSubtypeRemoteControlPause:
                 [self.audioPlayer pause];
+                [self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
                 break;
             case UIEventSubtypeRemoteControlTogglePlayPause:
-                if(self.audioPlayer.currentItem)
+                if(self.audioPlayer.currentItem){
                     [self.audioPlayer pause];
-                else {
+                    [self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
+                } else {
                     [self.audioPlayer play];
+                    [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
                 }
                 break;
             default:

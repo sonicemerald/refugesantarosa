@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *podcastTitle;
 @property (weak, nonatomic) IBOutlet UILabel *podcastSubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *podcastDate;
+@property (weak, nonatomic) IBOutlet UILabel *podcastAuthor;
 @property (weak, nonatomic) IBOutlet UIWebView *podcastSummary;
 @property (weak, nonatomic) IBOutlet OBSlider *playerSlider;
 @property (weak, nonatomic) IBOutlet UILabel *elapsedTime;

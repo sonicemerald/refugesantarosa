@@ -12,6 +12,7 @@
 
 @interface rcfPodcastTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *downloadButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *progressIndicator;
 
