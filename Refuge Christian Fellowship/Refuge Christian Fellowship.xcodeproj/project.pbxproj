@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541EC69D1976D60300CE90AE /* MXLCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6961976D60300CE90AE /* MXLCalendar.m */; };
+		541EC69E1976D60300CE90AE /* MXLCalendarEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6981976D60300CE90AE /* MXLCalendarEvent.m */; };
+		541EC69F1976D60300CE90AE /* MXLCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC69A1976D60300CE90AE /* MXLCalendarManager.m */; };
+		541EC6A01976D60300CE90AE /* NSTimeZone+ProperAbbreviation.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC69C1976D60300CE90AE /* NSTimeZone+ProperAbbreviation.m */; };
+		541EC6AC1976DA4100CE90AE /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6A31976DA4100CE90AE /* NSDate+convenience.m */; };
+		541EC6AD1976DA4100CE90AE /* NSMutableArray+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6A51976DA4100CE90AE /* NSMutableArray+convenience.m */; };
+		541EC6AE1976DA4100CE90AE /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6A71976DA4100CE90AE /* UIColor+expanded.m */; };
+		541EC6AF1976DA4100CE90AE /* UIView+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6A91976DA4100CE90AE /* UIView+convenience.m */; };
+		541EC6B01976DA4100CE90AE /* VRGCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6AB1976DA4100CE90AE /* VRGCalendarView.m */; };
+		541EC6B31976DB7E00CE90AE /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6B21976DB7E00CE90AE /* MBProgressHUD.m */; };
 		54230089192C393200830A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54230088192C393200830A4C /* Foundation.framework */; };
 		5423008B192C393200830A4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5423008A192C393200830A4C /* CoreGraphics.framework */; };
 		5423008D192C393200830A4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5423008C192C393200830A4C /* UIKit.framework */; };
@@ -48,6 +58,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		541EC6951976D60300CE90AE /* MXLCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXLCalendar.h; sourceTree = "<group>"; };
+		541EC6961976D60300CE90AE /* MXLCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXLCalendar.m; sourceTree = "<group>"; };
+		541EC6971976D60300CE90AE /* MXLCalendarEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXLCalendarEvent.h; sourceTree = "<group>"; };
+		541EC6981976D60300CE90AE /* MXLCalendarEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXLCalendarEvent.m; sourceTree = "<group>"; };
+		541EC6991976D60300CE90AE /* MXLCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXLCalendarManager.h; sourceTree = "<group>"; };
+		541EC69A1976D60300CE90AE /* MXLCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXLCalendarManager.m; sourceTree = "<group>"; };
+		541EC69B1976D60300CE90AE /* NSTimeZone+ProperAbbreviation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+ProperAbbreviation.h"; sourceTree = "<group>"; };
+		541EC69C1976D60300CE90AE /* NSTimeZone+ProperAbbreviation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+ProperAbbreviation.m"; sourceTree = "<group>"; };
+		541EC6A21976DA4100CE90AE /* NSDate+convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+convenience.h"; sourceTree = "<group>"; };
+		541EC6A31976DA4100CE90AE /* NSDate+convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+convenience.m"; sourceTree = "<group>"; };
+		541EC6A41976DA4100CE90AE /* NSMutableArray+convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+convenience.h"; sourceTree = "<group>"; };
+		541EC6A51976DA4100CE90AE /* NSMutableArray+convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+convenience.m"; sourceTree = "<group>"; };
+		541EC6A61976DA4100CE90AE /* UIColor+expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
+		541EC6A71976DA4100CE90AE /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
+		541EC6A81976DA4100CE90AE /* UIView+convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+convenience.h"; sourceTree = "<group>"; };
+		541EC6A91976DA4100CE90AE /* UIView+convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+convenience.m"; sourceTree = "<group>"; };
+		541EC6AA1976DA4100CE90AE /* VRGCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRGCalendarView.h; sourceTree = "<group>"; };
+		541EC6AB1976DA4100CE90AE /* VRGCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRGCalendarView.m; sourceTree = "<group>"; };
+		541EC6B11976DB7E00CE90AE /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		541EC6B21976DB7E00CE90AE /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		54230085192C393200830A4C /* Refuge Christian Fellowship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refuge Christian Fellowship.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54230088192C393200830A4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5423008A192C393200830A4C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -119,6 +149,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		541EC6941976D48700CE90AE /* MXLCalendarManager */ = {
+			isa = PBXGroup;
+			children = (
+				541EC6951976D60300CE90AE /* MXLCalendar.h */,
+				541EC6961976D60300CE90AE /* MXLCalendar.m */,
+				541EC6971976D60300CE90AE /* MXLCalendarEvent.h */,
+				541EC6981976D60300CE90AE /* MXLCalendarEvent.m */,
+				541EC6991976D60300CE90AE /* MXLCalendarManager.h */,
+				541EC69A1976D60300CE90AE /* MXLCalendarManager.m */,
+				541EC69B1976D60300CE90AE /* NSTimeZone+ProperAbbreviation.h */,
+				541EC69C1976D60300CE90AE /* NSTimeZone+ProperAbbreviation.m */,
+			);
+			name = MXLCalendarManager;
+			sourceTree = "<group>";
+		};
+		541EC6A11976DA4100CE90AE /* VRGCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				541EC6A21976DA4100CE90AE /* NSDate+convenience.h */,
+				541EC6A31976DA4100CE90AE /* NSDate+convenience.m */,
+				541EC6A41976DA4100CE90AE /* NSMutableArray+convenience.h */,
+				541EC6A51976DA4100CE90AE /* NSMutableArray+convenience.m */,
+				541EC6A61976DA4100CE90AE /* UIColor+expanded.h */,
+				541EC6A71976DA4100CE90AE /* UIColor+expanded.m */,
+				541EC6A81976DA4100CE90AE /* UIView+convenience.h */,
+				541EC6A91976DA4100CE90AE /* UIView+convenience.m */,
+				541EC6AA1976DA4100CE90AE /* VRGCalendarView.h */,
+				541EC6AB1976DA4100CE90AE /* VRGCalendarView.m */,
+			);
+			path = VRGCalendarView;
+			sourceTree = "<group>";
+		};
 		5423007C192C393200830A4C = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +237,9 @@
 		5423008F192C393200830A4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				541EC6B11976DB7E00CE90AE /* MBProgressHUD.h */,
+				541EC6B21976DB7E00CE90AE /* MBProgressHUD.m */,
+				541EC6941976D48700CE90AE /* MXLCalendarManager */,
 				54230090192C393200830A4C /* Refuge Christian Fellowship-Info.plist */,
 				54230091192C393200830A4C /* InfoPlist.strings */,
 				54230094192C393200830A4C /* main.m */,
@@ -215,6 +280,7 @@
 		54AD48D21967AFB50088D4F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				541EC6A11976DA4100CE90AE /* VRGCalendarView */,
 				542300A3192C393200830A4C /* rcfViewController.h */,
 				542300A4192C393200830A4C /* rcfViewController.m */,
 				54AD48DF196855F40088D4F4 /* Podcast */,
@@ -358,19 +424,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				542300D4192DD11F00830A4C /* rcfPodcastTableViewCell.m in Sources */,
+				541EC69D1976D60300CE90AE /* MXLCalendar.m in Sources */,
 				54AD48D41967BB5E0088D4F4 /* rcfBlogTableViewController.m in Sources */,
 				54AD48DA1967C68F0088D4F4 /* rcfBlogDetailView.m in Sources */,
+				541EC6B01976DA4100CE90AE /* VRGCalendarView.m in Sources */,
 				54AD48DD1967C9810088D4F4 /* rcfBlog.m in Sources */,
 				542300D1192D600800830A4C /* rcfPodcastParseOperation.m in Sources */,
+				541EC6B31976DB7E00CE90AE /* MBProgressHUD.m in Sources */,
 				54AD48D71967BEA40088D4F4 /* rcfBlogTableViewCell.m in Sources */,
 				54230099192C393200830A4C /* rcfAppDelegate.m in Sources */,
+				541EC6AC1976DA4100CE90AE /* NSDate+convenience.m in Sources */,
 				54230095192C393200830A4C /* main.m in Sources */,
 				54D096311961C398005F8CC6 /* OBSlider.m in Sources */,
+				541EC69E1976D60300CE90AE /* MXLCalendarEvent.m in Sources */,
 				542300CE192C6C1F00830A4C /* rcfPodcast.m in Sources */,
+				541EC6AD1976DA4100CE90AE /* NSMutableArray+convenience.m in Sources */,
 				542300CB192C55F100830A4C /* rcfPodcastTableViewController.m in Sources */,
 				54AD48CF1967AEC00088D4F4 /* rcfBlogParseOperation.m in Sources */,
 				5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */,
+				541EC6AE1976DA4100CE90AE /* UIColor+expanded.m in Sources */,
 				542300A5192C393200830A4C /* rcfViewController.m in Sources */,
+				541EC69F1976D60300CE90AE /* MXLCalendarManager.m in Sources */,
+				541EC6AF1976DA4100CE90AE /* UIView+convenience.m in Sources */,
+				541EC6A01976D60300CE90AE /* NSTimeZone+ProperAbbreviation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

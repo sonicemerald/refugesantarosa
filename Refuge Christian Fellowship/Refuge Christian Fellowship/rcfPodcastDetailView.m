@@ -15,9 +15,7 @@
 
 - (void) viewDidLoad{
     [super viewDidLoad];
-    
 //    self.view.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:100];
-    
     self.playerSlider.thumbTintColor = [UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f];
     self.podcastTitle.text = self.podcast.title;
     self.podcastSubtitle.text = self.podcast.subtitle;
@@ -67,11 +65,7 @@
     NSURL *urlStream = [NSURL URLWithString:self.podcast.guidlink];
     
     self.item = [[AVPlayerItem alloc] initWithURL:localURL];
-//    NSLog(@"self.item %@", self.item.asset);
-//    NSLog(@"self.item %lld", self.item.duration.value);
-//    NSLog(@"playable: %d", self.item.asset.playable);
-    if(!self.item.asset.playable){
-//    if(self.item.duration.value == CMTimeMake(0, 0).value){
+    if(!self.item.asset.playable){//    if(self.item.duration.value == CMTimeMake(0, 0).value){
         NSLog(@"using stream");
         self.item = [[AVPlayerItem alloc] initWithURL:urlStream];
     }
