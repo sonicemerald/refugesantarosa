@@ -105,6 +105,7 @@
         
         // load up the events for today
         currentEvents = [currentCalendar eventsForDate:date];
+        NSLog(@"current, %@", currentEvents);
         
         // Refresh UI
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -161,11 +162,12 @@
     
     VRGCalendarView *calendar = [[VRGCalendarView alloc] init];
     [calendar setFrame:CGRectMake(0.0f, 20.0f, 320.0f, 320.0f)];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"CST"]];
+    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
     
     [calendar setDelegate:self];
     [self.view addSubview:calendar];
-    
+    eventsTableView.delegate = self;
+    eventsTableView.dataSource = self;
     
     MXLCalendarManager *calendarManager = [[MXLCalendarManager alloc] init];
     NSURL *url = [NSURL URLWithString:@"http://www.google.com/calendar/ical/media%40refugecf.com/private-83713ecba5eeeb59c17c291c5266772e/basic.ics"];
