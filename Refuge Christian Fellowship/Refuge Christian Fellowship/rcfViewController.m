@@ -37,13 +37,14 @@
             // For this initial check, all we need to know is whether there's at least ONE event on each day, nothing more.
             // So we loop through each event...
             for (MXLCalendarEvent *event in currentCalendar.events) {
-                
+                NSLog(@"events: %@", event);
                 NSDateComponents *components = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit | NSDayCalendarUnit fromDate:[event eventStartDate]];
                 
                 // If the event starts this month, add it to the array
                 if ([components month] == month) {
                     [daysArray addObject:[NSNumber numberWithInteger:[components day]]];
                     [currentCalendar addEvent:event onDateString:[dateFormatter stringFromDate:[event eventStartDate]]];
+                    NSLog(@"dateString: %@", [dateFormatter stringFromDate:[event eventStartDate]]);
                 } else {
                     // We loop through each day, check if there's an event already there
                     // and if there is, we move onto the next one and repeat until we find a day WITHOUT an event on.
@@ -80,6 +81,7 @@
 
 -(void)calendarView:(VRGCalendarView *)calendarView dateSelected:(NSDate *)date {
     // Check if all the events on this day have loaded
+    NSLog(@"date is: %@", date);
     if (![currentCalendar hasLoadedAllEventsForDate:date]) {
         // If not, show a loading HUD
         MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -105,7 +107,19 @@
         
         // load up the events for today
         currentEvents = [currentCalendar eventsForDate:date];
-        NSLog(@"current, %@", currentEvents);
+//        NSUInteger count = 0;
+//        for (MXLCalendarEvent *event in currentCalendar.events) {
+//            NSLog(@"object: %@, %lu", event.eventSummary, (unsigned long)count);
+//            count++;
+//            if(!(event.eventStartDate)){
+//                count--;
+//                NSLog(@"removing %@ count: %lu", event.eventSummary, count);
+//                [[currentCalendar eventsForDate:date] removeObjectAtIndex:count];
+//            }
+//        }
+//        currentEvents = [currentCalendar eventsForDate:date];
+        
+            NSLog(@"current, %@", currentEvents.description);
         
         // Refresh UI
         dispatch_async(dispatch_get_main_queue(), ^{

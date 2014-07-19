@@ -122,14 +122,27 @@
         eventScanner = [NSScanner scannerWithString:event];
         [eventScanner scanUpToString:[NSString stringWithFormat:@"DTSTART;TZID=%@:", timezoneIDString] intoString:nil];
         [eventScanner scanUpToString:@"\n" intoString:&startDateTimeString];
+        NSLog(@"start date time string: %@", startDateTimeString);
         startDateTimeString = [[startDateTimeString stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"DTSTART;TZID=%@:", timezoneIDString] withString:@""] stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-        
+        NSLog(@"start date time string: %@", startDateTimeString);
+
         if (!startDateTimeString) {
+            NSLog(@"event: %@", event);
             eventScanner = [NSScanner scannerWithString:event];
             [eventScanner scanUpToString:@"DTSTART:" intoString:nil];
             [eventScanner scanUpToString:@"\n" intoString:&startDateTimeString];
             startDateTimeString = [[startDateTimeString stringByReplacingOccurrencesOfString:@"DTSTART:" withString:@""] stringByReplacingOccurrencesOfString:@"\r" withString:@""];
         }
+        
+        if (!startDateTimeString) {
+            NSLog(@"event: %@", event);
+            eventScanner = [NSScanner scannerWithString:event];
+            [eventScanner scanUpToString:@"DTSTART;VALUE=DATE:" intoString:nil];
+            [eventScanner scanUpToString:@"\n" intoString:&startDateTimeString];
+            startDateTimeString = [[startDateTimeString stringByReplacingOccurrencesOfString:@"DTSTART;VALUE=DATE:" withString:@""] stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            NSLog(@"value=date: %@", startDateTimeString);
+        }
+        
         
         // Extract end time
         eventScanner = [NSScanner scannerWithString:event];
@@ -240,7 +253,7 @@
             [eventScanner scanUpToString:@"EXDATE;" intoString:nil];
         }
         
-        MXLCalendarEvent *event = [[MXLCalendarEvent alloc] initWithStartDate:startDateTimeString
+        MXLCalendarEvent *mevent = [[MXLCalendarEvent alloc] initWithStartDate:startDateTimeString
                                                                       endDate:endDateTimeString
                                                                     createdAt:createdDateTimeString
                                                                  lastModified:lastModifiedDateTimeString
@@ -254,7 +267,7 @@
                                                                exceptionDates:exceptionDates
                                                                 exceptionRule:exceptionRuleString
                                                            timeZoneIdentifier:calendarString];
-        [calendar addEvent:event];
+        [calendar addEvent:mevent];
         
     }
     

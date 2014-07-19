@@ -105,6 +105,17 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentsDirectory = URLs[0];
+    
+    NSURL *dp = [documentsDirectory URLByAppendingPathComponent:@"podcasts/"];
+    NSString *dataPath = [NSString stringWithFormat:@"%@", dp];
+    
+    if (![fileManager fileExistsAtPath:dataPath]) 
+        [fileManager createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error];
 }
 
 -(void)handleError:(NSError *)error {
@@ -309,22 +320,29 @@
     NSError *error;
     NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *documentsDirectory = URLs[0];
+//
+//    NSURL *dp = [documentsDirectory URLByAppendingPathComponent:@"podcasts/"];
+//    NSString *dataPath = [NSString stringWithFormat:@"%@", dp];
+//
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
+//        [[NSFileManager defaultManager] createDirectoryAtURL:dp withIntermediateDirectories:NO attributes:nil error:&error];
+////        [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+//    NSLog(@"Created %@", dp);
+//    BOOL *isdir;
+//    [[NSFileManager defaultManager] fileExistsAtPath:dataPath isDirectory:isdir];
+//    if(isdir)
+//        NSLog(@"it's a directory");
+//    else
+//        NSLog(@"What is it?");
 
-    NSURL *dp = [documentsDirectory URLByAppendingPathComponent:@"podcasts"];
-    NSString *dataPath = [NSString stringWithFormat:@"%@", dp];
-
-    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
-        [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
-    
     NSURL *url = [NSURL URLWithString:self.downloadingItem];
 
-    NSString *fullPath = @"/podcasts/";
+    NSString *fullPath = @"podcasts/";
     fullPath = [fullPath stringByAppendingPathComponent:[url lastPathComponent]];
     
     
     NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:fullPath];
     NSLog(@"DestinationPath=%@", destinationPath);
-    
     
     
     // Make sure we overwrite anything that's already there
@@ -345,7 +363,7 @@
     }
     else
     {
-        NSLog(@"Couldn't copy the downloaded file");
+        NSLog(@"Couldn't copy the downloaded file: %@", error);
     }
     
     if(downloadTask == cancellableTask) {

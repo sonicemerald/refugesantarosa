@@ -248,7 +248,8 @@
         int row = floorf(yLocation/(kVRGCalendarViewDayHeight+2));
         
         int blockNr = (column+1)+row*7;
-        int firstWeekDay = [self.currentMonth firstWeekDayInMonth]-1; //-1 because weekdays begin at 1, not 0
+        int firstWeekDay = [self.currentMonth firstWeekDayInMonth];
+        //used to be -1 when mn,t,w,th,f, sat,sun because weekdays begin at 1, not 0
         int date = blockNr-firstWeekDay;
         [self selectDate:date];
         return;
@@ -328,7 +329,7 @@
     dateFormatter.dateFormat=@"EEE";
     //always assume gregorian with monday first
     NSMutableArray *weekdays = [[NSMutableArray alloc] initWithArray:[dateFormatter shortWeekdaySymbols]];
-    [weekdays moveObjectFromIndex:0 toIndex:6];
+//    [weekdays moveObjectFromIndex:0 toIndex:6];
     
     CGContextSetFillColorWithColor(context, 
                                    [UIColor colorWithHexString:@"0x383838"].CGColor);

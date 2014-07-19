@@ -63,8 +63,11 @@
     }
     
     // If there are already events for this date...
+    NSLog(@"dateString, %@", dateString);
     if ([daysOfEvents objectForKey:dateString]) {
+        NSLog(@"dateString, %@", dateString);
         // If the event has already been logged on this day, just return.
+        NSLog(@"dateString, %@", dateString);
         if ([[daysOfEvents objectForKey:dateString] containsObject:event])
             return;
 

@@ -51,8 +51,11 @@
         // Set up the shared NSDateFormatter instance to convert the strings to NSDate objects
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-
-        [dateFormatter setDateFormat:@"yyyyMMdd HHmmss"];
+        
+        [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+        
+         
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
         
         // Set the date objects to the converted NSString objects
         self.eventStartDate = [self dateFromString:startString];
@@ -79,11 +82,15 @@
 }
 
 -(NSDate *)dateFromString:(NSString *)dateString {
-    dateString = [dateString stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    dateString = [dateString stringByReplacingOccurrencesOfString:@"T" withString:@""];
     dateString = [dateString stringByReplacingOccurrencesOfString:@"Z" withString:@""];
-    
-    NSDate *date = [dateFormatter dateFromString:dateString];
-    
+
+    NSDate *date = [[NSDate alloc] init];
+    date = [dateFormatter dateFromString:dateString];
+    if(!date){
+            [dateFormatter setDateFormat:@"yyyyMMdd"];
+            date = [dateFormatter dateFromString:dateString];
+    }
     return date;
 }
 
@@ -290,8 +297,8 @@
     NSInteger dayOfYear = [calendar ordinalityOfUnit:NSDayCalendarUnit inUnit:NSYearCalendarUnit forDate:date];
     
     NSString *dayString = [self dayOfWeekFromInteger:components.weekday];
-    NSString *weekNumberString  = [NSString stringWithFormat:@"%i", [components weekOfYear]];
-    NSString *monthString = [NSString stringWithFormat:@"%i", m];
+    NSString *weekNumberString  = [NSString stringWithFormat:@"%li", (long)[components weekOfYear]];
+    NSString *monthString = [NSString stringWithFormat:@"%li", (long)m];
     
     // If the event is set to repeat on a certain day of the week,
     // it MUST be the current date's weekday for it to occur
