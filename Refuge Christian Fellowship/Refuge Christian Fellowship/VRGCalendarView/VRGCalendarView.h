@@ -44,6 +44,7 @@
 @property (nonatomic, retain) NSArray *markedColors;
 @property (nonatomic, getter = calendarHeight) float calendarHeight;
 @property (nonatomic, retain, getter = selectedDate) NSDate *selectedDate;
+@property (nonatomic) int date;
 @property (nonatomic, retain) NSTimeZone *timeZone;
 -(void)selectDate:(int)date;
 -(void)reset;

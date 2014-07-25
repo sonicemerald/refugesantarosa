@@ -1,3 +1,4 @@
+
 //
 //  rcfSecondViewController.m
 //  Refuge Christian Fellowship
@@ -81,7 +82,7 @@
 
 -(void)calendarView:(VRGCalendarView *)calendarView dateSelected:(NSDate *)date {
     // Check if all the events on this day have loaded
-    NSLog(@"date is: %@", date);
+    NSLog(@"the actual date is: %@", date);
     if (![currentCalendar hasLoadedAllEventsForDate:date]) {
         // If not, show a loading HUD
         MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -107,25 +108,25 @@
         
         // load up the events for today
         currentEvents = [currentCalendar eventsForDate:date];
-//        NSUInteger count = 0;
-//        for (MXLCalendarEvent *event in currentCalendar.events) {
-//            NSLog(@"object: %@, %lu", event.eventSummary, (unsigned long)count);
-//            count++;
-//            if(!(event.eventStartDate)){
-//                count--;
-//                NSLog(@"removing %@ count: %lu", event.eventSummary, count);
-//                [[currentCalendar eventsForDate:date] removeObjectAtIndex:count];
-//            }
-//        }
-//        currentEvents = [currentCalendar eventsForDate:date];
+        //        NSUInteger count = 0;
+        //        for (MXLCalendarEvent *event in currentCalendar.events) {
+        //            NSLog(@"object: %@, %lu", event.eventSummary, (unsigned long)count);
+        //            count++;
+        //            if(!(event.eventStartDate)){
+        //                count--;
+        //                NSLog(@"removing %@ count: %lu", event.eventSummary, count);
+        //                [[currentCalendar eventsForDate:date] removeObjectAtIndex:count];
+        //            }
+        //        }
+        //        currentEvents = [currentCalendar eventsForDate:date];
         
-            NSLog(@"current, %@", currentEvents.description);
+        NSLog(@"current, %@", currentEvents.description);
         
         // Refresh UI
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            
-            selectedDate = date;
+            NSLog(@"How did date become this? %@", date);
+            //selectedDate = date;
             [eventsTableView reloadData];
         });
     });
@@ -176,7 +177,7 @@
     
     VRGCalendarView *calendar = [[VRGCalendarView alloc] init];
     [calendar setFrame:CGRectMake(0.0f, 20.0f, 320.0f, 320.0f)];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"PDT"]];
     
     [calendar setDelegate:self];
     [self.view addSubview:calendar];
@@ -185,7 +186,7 @@
     
     MXLCalendarManager *calendarManager = [[MXLCalendarManager alloc] init];
     NSURL *url = [NSURL URLWithString:@"http://www.google.com/calendar/ical/media%40refugecf.com/private-83713ecba5eeeb59c17c291c5266772e/basic.ics"];
-
+    
     [calendarManager scanICSFileAtRemoteURL:url withCompletionHandler:^(MXLCalendar *calendar, NSError *error) {
         currentCalendar = [[MXLCalendar alloc] init];
         currentCalendar = calendar;
