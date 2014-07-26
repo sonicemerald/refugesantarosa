@@ -53,6 +53,7 @@
 //NSArray can either contain NSDate objects or NSNumber objects with an int of the day.
 -(void)markDates:(NSArray *)dates {
     self.markedDates = dates;
+    NSLog(@"marked dates are: %@", self.markedDates.description);
     NSMutableArray *colors = [[NSMutableArray alloc] init];
     
     for (int i = 0; i<[dates count]; i++) {
@@ -468,8 +469,6 @@
         NSString *dateS = [NSString stringWithFormat:@"%i",targetDate];
         NSLog(@"date: %@", dateS);
         //draw selected date
-        NSLog(@"it thinks that the selectedDate is %@", selectedDate);
-        //...selectedDate changes here...how?!
         if (selectedDate && i==selectedDateBlock) {
             CGRect rectangleGrid = CGRectMake(targetX,targetY,kVRGCalendarViewDayWidth+2,kVRGCalendarViewDayHeight+2);
             CGContextAddRect(context, rectangleGrid);
@@ -496,7 +495,8 @@
     
     
     //Draw markings
-    if (!self.markedDates || isSelectedDatePreviousMonth || isSelectedDateNextMonth) return;
+    NSLog(@"markedDates: %@", self.markedDates.description);
+   if (!self.markedDates || isSelectedDatePreviousMonth || isSelectedDateNextMonth) return;
     
     for (int i = 0; i<[self.markedDates count]; i++) {
         id markedDateObj = [self.markedDates objectAtIndex:i];
@@ -567,7 +567,7 @@
         labelCurrentMonth.textAlignment = UITextAlignmentCenter;
         
         [self performSelector:@selector(reset) withObject:nil afterDelay:0.1]; //so delegate can be set after init and still get called on init
-        //        [self reset];
+        [self reset];
     }
     return self;
 }

@@ -10,8 +10,11 @@
 #import "rcfViewController.h"
 #import "MXLCalendarManager.h"
 #import "MBProgressHUD.h"
+#import "NSDate+convenience.h"
 
 @interface rcfViewController ()
+
+@property (nonatomic) VRGCalendarView *vrgcal;
 
 @end
 
@@ -19,6 +22,8 @@
 
 -(void)calendarView:(VRGCalendarView *)calendarView switchedToMonth:(int)month year:(int)year numOfDays:(int)days targetHeight:(float)targetHeight animated:(BOOL)animated {
     // If this month hasn't already loaded and been cached, start loading events
+    NSLog(@"savedDates: %@", [[savedDates objectForKey:[NSNumber numberWithInt:year]] objectForKey:[NSNumber numberWithInt:month]]);
+    savedDates = nil;
     if (![[savedDates objectForKey:[NSNumber numberWithInt:year]] objectForKey:[NSNumber numberWithInt:month]]) {
         
         // Show a loading HUD (https://github.com/jdg/MBProgressHUD)
@@ -71,6 +76,7 @@
             // Refresh the UI on main thread
             dispatch_async( dispatch_get_main_queue(), ^{
                 [calendarView markDates:daysArray];
+                NSLog(@"daysArray: %@", daysArray.description);
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             });
         });
@@ -126,7 +132,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             NSLog(@"How did date become this? %@", date);
-            //selectedDate = date;
+            selectedDate = date;
             [eventsTableView reloadData];
         });
     });
@@ -175,27 +181,30 @@
     
     savedDates = [[NSMutableDictionary alloc] init];
     
-    VRGCalendarView *calendar = [[VRGCalendarView alloc] init];
-    [calendar setFrame:CGRectMake(0.0f, 20.0f, 320.0f, 320.0f)];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"PDT"]];
+    self.vrgcal = [[VRGCalendarView alloc] init];
+    [self.vrgcal setFrame:CGRectMake(0.0f, 20.0f, 320.0f, 320.0f)];
+    [self.vrgcal setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"PDT"]];
     
-    [calendar setDelegate:self];
-    [self.view addSubview:calendar];
+    [self.vrgcal setDelegate:self];
+    [self.view addSubview:self.vrgcal];
     eventsTableView.delegate = self;
     eventsTableView.dataSource = self;
     
     MXLCalendarManager *calendarManager = [[MXLCalendarManager alloc] init];
-    NSURL *url = [NSURL URLWithString:@"http://www.google.com/calendar/ical/media%40refugecf.com/private-83713ecba5eeeb59c17c291c5266772e/basic.ics"];
+    NSURL *url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/1jq6o2vq83ep2vqhce4q194jdk%40group.calendar.google.com/private-e83371d9b013453954693b3b871fc027/basic.ics"];
     
     [calendarManager scanICSFileAtRemoteURL:url withCompletionHandler:^(MXLCalendar *calendar, NSError *error) {
         currentCalendar = [[MXLCalendar alloc] init];
         currentCalendar = calendar;
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+        NSLog(@"calaendar %@", self.vrgcal.description);
+        [self calendarView:self.vrgcal switchedToMonth:[components month] year:[components year] numOfDays:[[NSDate date] numDaysInMonth] targetHeight:[self.vrgcal calendarHeight] animated:NO];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [eventsTableView reloadData];
+            
         });
     }];
-    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -204,5 +213,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
