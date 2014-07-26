@@ -11,12 +11,16 @@
 #import "MXLCalendarManager.h"
 #import "MBProgressHUD.h"
 #import "NSDate+convenience.h"
+#import <EventKit/EventKit.h>
 
 @interface rcfViewController ()
 
 @property (nonatomic) VRGCalendarView *vrgcal;
+@property (nonatomic) MXLCalendarEvent *currentEvent;
 
 @end
+
+static EKEventStore *eventStore = nil;
 
 @implementation rcfViewController
 
@@ -168,12 +172,116 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MXLCalendarEvent *currentEvent = [[currentCalendar eventsForDate:selectedDate] objectAtIndex:indexPath.row];
     
+    self.currentEvent = currentEvent;
+//    [self setUpCalendarWithEvent:self.currentEvent];
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:currentEvent.eventDescription
+                                                      message:currentEvent.eventSummary
+                                                     delegate:self
+                                            cancelButtonTitle:@"Ok"
+                                            otherButtonTitles:@"Add to Calendar", nil];
+    [message show];
+    
+//    EKEventStore *store = [[EKEventStore alloc] init];
+    
     NSLog(@"Event: %@", currentEvent.eventDescription);
     NSLog(@"Event ID: %@", currentEvent.eventUniqueID);
     NSLog(@"Descr: %@", currentEvent.eventSummary);
     NSLog(@"Start: %@", currentEvent.eventStartDate);
     NSLog(@"End  : %@", currentEvent.eventEndDate);
 }
+
+//Store Event to phone's calendar.
++ (void)requestAccess:(void (^)(BOOL granted, NSError *error))callback;
+{
+    if (eventStore == nil) {
+        eventStore = [[EKEventStore alloc] init];
+    }
+    // request permissions
+    [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:callback];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        [alertView dismissWithClickedButtonIndex:0 animated:NO];
+        
+        
+        [self setUpCalendarWithEvent:self.currentEvent];
+    }
+
+}
+-(BOOL) setUpCalendarWithEvent:(MXLCalendarEvent *)curEvent{
+    NSLog(@"setting up calendar");
+    EKEvent *event = [EKEvent eventWithEventStore:eventStore];
+    EKCalendar *calendar = nil;
+    NSString *calendarIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:@"refugeEventsCalendar"];
+    
+    // when identifier exists, my calendar probably already exists
+    // note that user can delete my calendar. In that case I have to create it again.
+    if (calendarIdentifier) {
+        calendar = [eventStore calendarWithIdentifier:calendarIdentifier];
+    }
+    
+    // calendar doesn't exist, create it and save it's identifier
+    if (!calendar) {
+        calendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:eventStore];
+        
+        // set calendar name. This is what users will see in their Calendar app
+        // [calendar setTitle:[KKCalendar calendarName]];
+        [calendar setTitle:@"RefugeCF"];
+        
+        // find appropriate source type. I'm interested only in local calendars but
+        // there are also calendars in iCloud, MS Exchange, ...
+        // look for EKSourceType in manual for more options
+        for (EKSource *s in eventStore.sources) {
+            if (s.sourceType == EKSourceTypeLocal) {
+                calendar.source = s;
+                break;
+            }
+        }
+        
+        // save this in NSUserDefaults data for retrieval later
+        NSString *calendarIdentifier = [calendar calendarIdentifier];
+        
+        NSError *error = nil;
+        BOOL saved = [eventStore saveCalendar:calendar commit:YES error:&error];
+        if (saved) {
+            NSLog(@"saved event");
+            [[NSUserDefaults standardUserDefaults] setObject:calendarIdentifier forKey:@"refugeEventsCalendar"];
+        } else {
+            // unable to save calendar
+            return NO;
+        }
+    }
+    
+    // this shouldn't happen
+    if (!calendar) {
+        return NO;
+    }
+
+    // assign basic information to the event; location is optional
+    event.calendar = calendar;
+    event.title = curEvent.eventDescription;
+    event.notes = curEvent.eventSummary;
+    event.startDate = curEvent.eventStartDate;
+    event.endDate = curEvent.eventEndDate;
+    event.location = curEvent.eventLocation;
+    
+//    NSURL *url = [NSURL URLWithString:@"calshow://"];
+//    [[UIApplication sharedApplication] openURL:url];
+    
+    NSError *error = nil;
+    // save event to the callendar
+    BOOL result = [eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&error];
+    if (result) {
+        return YES;
+    } else {
+        NSLog(@"Error saving event: %@", error);
+        // unable to save event to the calendar
+        return NO;
+    }
+}
+
+
 
 - (void)viewDidLoad
 {
@@ -197,7 +305,6 @@
         currentCalendar = [[MXLCalendar alloc] init];
         currentCalendar = calendar;
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
-        NSLog(@"calaendar %@", self.vrgcal.description);
         [self calendarView:self.vrgcal switchedToMonth:[components month] year:[components year] numOfDays:[[NSDate date] numDaysInMonth] targetHeight:[self.vrgcal calendarHeight] animated:NO];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -206,6 +313,16 @@
         });
     }];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [rcfViewController requestAccess:^(BOOL granted, NSError *error) {
+        if (granted) {
+            NSLog(@"granted access");
+        } else {
+            NSLog(@"no premissions to use calendar");
+            // you don't have permissions to access calendars
+        }
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning

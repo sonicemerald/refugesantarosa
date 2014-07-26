@@ -21,4 +21,6 @@
     NSMutableArray *currentEvents;
 }
 
++(void)requestAccess:(void (^)(BOOL granted, NSError *error))callback;
+
 @end
