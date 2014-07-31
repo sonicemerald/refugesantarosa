@@ -49,7 +49,40 @@
                                                         } forState:UIControlStateNormal];
    */
     // Override point for customization after application launch.
+    
+    //Once the view has loaded then we can register to begin recieving controls and we can become the first responder
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+
+    
     return YES;
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {
+    
+    if (receivedEvent.type == UIEventTypeRemoteControl) {
+        switch (receivedEvent.subtype) {
+            case UIEventSubtypeRemoteControlPlay:
+                [self.audioPlayer play];
+                //[self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
+                break;
+            case UIEventSubtypeRemoteControlPause:
+                [self.audioPlayer pause];
+                //[self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
+                break;
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+                if(self.audioPlayer.currentItem){
+                    [self.audioPlayer pause];
+                    //[self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
+                } else {
+                    [self.audioPlayer play];
+                    //[self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

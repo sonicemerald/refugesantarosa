@@ -25,13 +25,15 @@
 @property (nonatomic) NSIndexPath *indexpath;
 @property (strong, nonatomic) NSURLSessionDownloadTask *resumableTask;
 @property (nonatomic) NSString *downloadingItem;
+@property (nonatomic) rcfAppDelegate *ad;
 @end
 
 @implementation rcfPodcastTableViewController
 
-- (void)viewDidLoad
+- (void)viewDidLoad //Introduction paragraph
 {
     [super viewDidLoad];
+    self.ad = (rcfAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.tableView.bounces = NO;
     self.podcastList = [NSMutableArray array];
 
@@ -97,8 +99,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addPodcasts:) name:kAddPodcastEpisodeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(podcastError:) name:kPodcastErrorNotification object:nil];
     
-    if(self.audioPlayer == nil)
-        self.audioPlayer = [[AVPlayer alloc] init];
+    if(self.ad.audioPlayer == nil)
+        self.ad.audioPlayer = [[AVPlayer alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -212,8 +214,8 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         rcfPodcastDetailView *controller = [segue destinationViewController];
         controller.podcast = [self.podcastList objectAtIndex:myIndexPath.row];
-        controller.audioPlayer = self.audioPlayer;
-        NSLog(@"sending audioPlayer, %@, to detailView", self.audioPlayer);
+        controller.audioPlayer = self.ad.audioPlayer;
+        NSLog(@"sending audioPlayer, %@, to detailView", self.ad.audioPlayer);
             
     }
 

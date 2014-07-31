@@ -101,9 +101,9 @@
 }
 - (void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //Once the view has loaded then we can register to begin recieving controls and we can become the first responder
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [self becomeFirstResponder];
+//    //Once the view has loaded then we can register to begin recieving controls and we can become the first responder
+//    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+//    [self becomeFirstResponder];
     NSNumber *dur = [NSNumber numberWithFloat:ceilf((CMTimeGetSeconds(self.audioPlayer.currentItem.asset.duration)))];
     NSLog(@"%@ duration:", dur);
     [self.songInfo setObject:dur forKey:MPMediaItemPropertyPlaybackDuration];
@@ -305,32 +305,32 @@
 - (bool)canBecomeFirstResponder{
     return YES;
 }
-- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {
-    
-    if (receivedEvent.type == UIEventTypeRemoteControl) {
-        switch (receivedEvent.subtype) {
-            case UIEventSubtypeRemoteControlPlay:
-                [self.audioPlayer play];
-                [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
-                break;
-            case UIEventSubtypeRemoteControlPause:
-                [self.audioPlayer pause];
-                [self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
-                break;
-            case UIEventSubtypeRemoteControlTogglePlayPause:
-                if(self.audioPlayer.currentItem){
-                    [self.audioPlayer pause];
-                    [self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
-                } else {
-                    [self.audioPlayer play];
-                    [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
-                }
-                break;
-            default:
-                break;
-        }
-    }
-}
+//- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {
+//    
+//    if (receivedEvent.type == UIEventTypeRemoteControl) {
+//        switch (receivedEvent.subtype) {
+//            case UIEventSubtypeRemoteControlPlay:
+//                [self.audioPlayer play];
+//                [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
+//                break;
+//            case UIEventSubtypeRemoteControlPause:
+//                [self.audioPlayer pause];
+//                [self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
+//                break;
+//            case UIEventSubtypeRemoteControlTogglePlayPause:
+//                if(self.audioPlayer.currentItem){
+//                    [self.audioPlayer pause];
+//                    [self.playpausebtn setTitle:@"Play" forState:UIControlStateNormal];
+//                } else {
+//                    [self.audioPlayer play];
+//                    [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+//}
 
 
 /* END */
