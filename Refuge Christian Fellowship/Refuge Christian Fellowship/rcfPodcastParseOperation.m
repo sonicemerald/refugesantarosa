@@ -13,7 +13,7 @@
 NSString *kAddPodcastEpisodeNotification = @"AddEpisodeNotif";
 
 // NSNotification userInfo key for obtaining the earthquake data
-NSString *kPodcastResultsKey = @"EarthquakeResultsKey";
+NSString *kPodcastResultsKey = @"PodcastResultsKey";
 
 // NSNotification name for reporting errors
 NSString *kPodcastErrorNotification = @"PodcastErrorNotif";
@@ -25,6 +25,7 @@ NSString *kPodcastMessageErrorKey = @"PodcastMsgErrorKey";
 @property (nonatomic) rcfPodcast *currentPodcastObject;
 @property (nonatomic) NSMutableArray *currentParseBatch;
 @property (nonatomic) NSMutableString *currentParsedCharacterData;
+@property (nonatomic) NSString *imageurl;
 @end
 
 @implementation rcfPodcastParseOperation
@@ -82,6 +83,8 @@ static NSUInteger const kSizeOfPodcastsBatch = 10;
 
 // Reduce potential parsing errors by using string constants declared in a single place.
 static NSString * const kItemElementName = @"item";
+static NSString * const kImageElementName = @"image";
+static NSString * const kImageUrlElementName = @"url";
 static NSString * const kTitleElementName = @"title";
 static NSString * const kSubTitleElementName = @"itunes:subtitle";
 static NSString * const kAuthorElementName = @"itunes:author";
@@ -104,12 +107,17 @@ static NSString * const kLinkElementName = @"guid";
         _didAbortParsing = YES;
         [parser abortParsing];
     }
-    if ([elementName isEqualToString:kItemElementName]) {
+    
+    if ([elementName isEqualToString:kImageUrlElementName]){
+        // The contents are collected in parser:foundCharacters:.
+        _accumulatingParsedCharacterData = YES;
+        // The mutable string needs to be reset to empty.
+        [self.currentParsedCharacterData setString:@""];
+    } else if ([elementName isEqualToString:kItemElementName]) {
         //create the podcast object.
         rcfPodcast *podcast = [[rcfPodcast alloc] init];
         self.currentPodcastObject = podcast;
-    }
-    else if (
+    } else if (
              ([elementName isEqualToString:kTitleElementName] ||
              [elementName isEqualToString:kAuthorElementName] ||
              [elementName isEqualToString:kSubTitleElementName] ||
@@ -146,8 +154,15 @@ static NSString * const kLinkElementName = @"guid";
      </itunes:keywords>
      </item>
      */
+    if([elementName isEqualToString:kImageUrlElementName]){
+        self.imageurl = self.currentParsedCharacterData;
+        self.imageurl = [self.imageurl stringByReplacingOccurrencesOfString:@"http://www.podtrac.com/pts/redirect.mp3/" withString:@"http://"];
+        NSLog(@"the image url is %@", self.imageurl);
+    }
+
     
 if(self.currentPodcastObject != nil){
+    self.currentPodcastObject.imageurl = self.imageurl;
     if ([elementName isEqualToString:kItemElementName]) {
         [self.currentParseBatch addObject:self.currentPodcastObject];
         _parsedPodcastCounter++;

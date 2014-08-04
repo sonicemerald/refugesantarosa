@@ -13,10 +13,26 @@
 
 @implementation rcfPodcastDetailView
 
+
 - (void) viewDidLoad{
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:100];
     self.playerSlider.thumbTintColor = [UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f];
+    
+    NSURL *imageURL = [NSURL URLWithString:self.podcast.imageurl];
+    NSLog(@"%@", self.podcast.imageurl);
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+    self.artwork = [UIImage imageWithData:imageData];
+    self.podcastImage.image = self.artwork;
+//
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            // Update the UI
+//            self.podcastImage.image = [UIImage imageWithData:imageData];
+//        });
+//    });    
     self.podcastTitle.text = self.podcast.title;
     self.podcastSubtitle.text = self.podcast.subtitle;
     self.podcastDate.text = self.podcast.date;
@@ -296,7 +312,8 @@
     [self.songInfo setObject:self.podcast.subtitle forKey:MPMediaItemPropertyTitle];
     [self.songInfo setObject:self.podcast.author forKey:MPMediaItemPropertyArtist];
     [self.songInfo setObject:self.podcast.title forKey:MPMediaItemPropertyAlbumTitle];
-    
+    MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage:self.artwork];
+    [self.songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
     NSLog(@"%@", self.songInfo);
     
     //[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:self.songInfo];

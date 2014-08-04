@@ -19,6 +19,7 @@
     BOOL restoreVideoPlayStateAfterScrubbing;
 }
 @property (nonatomic) rcfPodcast *podcast;
+@property (weak, nonatomic) IBOutlet UIImageView *podcastImage;
 @property (weak, nonatomic) IBOutlet UILabel *podcastTitle;
 @property (weak, nonatomic) IBOutlet UILabel *podcastSubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *podcastDate;
@@ -34,6 +35,7 @@
 @property (nonatomic) NSMutableDictionary *songInfo;
 @property (nonatomic) AVPlayerItem *item;
 @property (nonatomic) BOOL cantplay;
+@property (nonatomic) UIImage *artwork;
 //-(void)initWithPodcast:(rcfPodcast *)podcast;
 
 @end

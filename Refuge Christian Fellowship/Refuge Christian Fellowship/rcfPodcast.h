@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *guidlink;
 @property (nonatomic, copy) NSString *date;
+@property (nonatomic, copy) NSString *imageurl;
 
 //@property (nonatomic, copy) NSString *duration;
 @end
