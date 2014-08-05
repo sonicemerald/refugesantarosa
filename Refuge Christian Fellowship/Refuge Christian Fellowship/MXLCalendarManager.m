@@ -112,6 +112,8 @@
         NSString *exceptionRuleString;
         NSMutableArray *exceptionDates = [[NSMutableArray alloc] init];
         
+        NSLog(@"event: %@", event);
+        
         // Extract event time zone ID
         eventScanner = [NSScanner scannerWithString:event];
         [eventScanner scanUpToString:@"DTSTART;TZID=" intoString:nil];
@@ -127,7 +129,7 @@
         NSLog(@"start date time string: %@", startDateTimeString);
 
         if (!startDateTimeString) {
-            NSLog(@"event: %@", event);
+            //NSLog(@"event: %@", event);
             eventScanner = [NSScanner scannerWithString:event];
             [eventScanner scanUpToString:@"DTSTART:" intoString:nil];
             [eventScanner scanUpToString:@"\n" intoString:&startDateTimeString];
@@ -135,7 +137,7 @@
         }
         
         if (!startDateTimeString) {
-            NSLog(@"event: %@", event);
+            //NSLog(@"event: %@", event);
             eventScanner = [NSScanner scannerWithString:event];
             [eventScanner scanUpToString:@"DTSTART;VALUE=DATE:" intoString:nil];
             [eventScanner scanUpToString:@"\n" intoString:&startDateTimeString];
@@ -229,6 +231,7 @@
         [eventScanner scanUpToString:@"RRULE:" intoString:nil];
         [eventScanner scanUpToString:@"\n" intoString:&repetitionString];
         repetitionString = [[[repetitionString stringByReplacingOccurrencesOfString:@"RRULE:" withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        NSLog(@"repitition string: %@", repetitionString);
         
         // Extract the event exception rules
         eventScanner = [NSScanner scannerWithString:event];

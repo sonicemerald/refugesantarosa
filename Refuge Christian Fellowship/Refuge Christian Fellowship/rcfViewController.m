@@ -299,7 +299,7 @@ static EKEventStore *eventStore = nil;
     eventsTableView.dataSource = self;
     
     MXLCalendarManager *calendarManager = [[MXLCalendarManager alloc] init];
-    NSURL *url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/1jq6o2vq83ep2vqhce4q194jdk%40group.calendar.google.com/private-e83371d9b013453954693b3b871fc027/basic.ics"];
+    NSURL *url = [NSURL URLWithString:@"http://www.google.com/calendar/ical/refugecf.com_eovqll344uloicj5ckkv8qpv30%40group.calendar.google.com/private-cbfebf6d4c4e241205cfe2a96603ce1f/basic.ics"];
     
     [calendarManager scanICSFileAtRemoteURL:url withCompletionHandler:^(MXLCalendar *calendar, NSError *error) {
         currentCalendar = [[MXLCalendar alloc] init];
