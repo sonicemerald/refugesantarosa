@@ -291,7 +291,7 @@
     }
     
     // Extract the components from the provided date
-    NSDateComponents *components = [calendar components:NSDayCalendarUnit | NSWeekCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
+    NSDateComponents *components = [calendar components:NSDayCalendarUnit | NSWeekCalendarUnit | NSMonthCalendarUnit | NSWeekdayOrdinalCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
                                                                    fromDate:date];
     NSInteger d = [components day];
     NSInteger m = [components month];
@@ -442,12 +442,23 @@
             } else {
                 return NO;
             }
-//        } else if (repeatRuleByDay){
-//            NSDateComponents *component = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:self.eventStartDate];
+        } else if (repeatRuleByDay){
+                        NSInteger repeater = 1;
+                        if([repeatRuleByDay containsObject:[NSString stringWithFormat:@"1%@", dayString]])
+                            repeater = 1;
+                        if([repeatRuleByDay containsObject:[NSString stringWithFormat:@"2%@", dayString]])
+                            repeater = 2;
+                        if([repeatRuleByDay containsObject:[NSString stringWithFormat:@"3%@", dayString]])
+                            repeater = 3;
+           if(components.weekdayOrdinal != repeater)
+               return NO;
+           else return ([self exceptionOnDate:date] ? NO : YES);
+            
+//            NSDateComponents *component = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitWeekOfMonth | NSCalendarUnitYear fromDate:date];
 //
 //            NSLog(@"Todate: %@", date);
 //            NSString *dayString = [self dayOfWeekFromInteger:components.weekday];
-//            NSString *dayString2 = [self dayOfWeekFromInteger:component.weekday];
+////            NSString *dayString2 = [self dayOfWeekFromInteger:component.weekday];
 //            NSInteger repeater = 1;
 //            if([repeatRuleByDay containsObject:[NSString stringWithFormat:@"1%@", dayString]])
 //                repeater = 1;
@@ -456,10 +467,13 @@
 //            if([repeatRuleByDay containsObject:[NSString stringWithFormat:@"3%@", dayString]])
 //                repeater = 3;
 //
-//            NSLog(@"%ld", [[calendar components:NSWeekOfMonthCalendarUnit fromDate:date] weekOfMonth]);
+////            NSLog(@"%ld", [[calendar components:NSWeekOfMonthCalendarUnit fromDate:date] weekOfMonth]);
 //
+////            if(component.weekOfMonth == repeater)
 ////            [[calendar components:NSWeekOfMonthCalendarUnit fromDate:date] weekOfMonth];
-//            if(([[calendar components:NSWeekOfMonthCalendarUnit fromDate:date] weekOfMonth] == repeater))
+//            NSLog(@"week: %ld", (long)component.weekOfMonth);//weekOfMonth);
+//            NSLog(@"repeater: %ld", (long)repeater);
+//            if(component.weekOfMonth == repeater)
 //                return NO;
 //            else return ([self exceptionOnDate:date] ? NO : YES);
 //
