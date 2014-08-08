@@ -467,7 +467,7 @@
         }
         
         NSString *dateS = [NSString stringWithFormat:@"%i",targetDate];
-        NSLog(@"date: %@", dateS);
+        //NSLog(@"date: %@", dateS);
         //draw selected date
         if (selectedDate && i==selectedDateBlock) {
             CGRect rectangleGrid = CGRectMake(targetX,targetY,kVRGCalendarViewDayWidth+2,kVRGCalendarViewDayHeight+2);

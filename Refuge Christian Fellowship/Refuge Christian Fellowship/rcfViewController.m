@@ -46,16 +46,12 @@ static EKEventStore *eventStore = nil;
             
             // For this initial check, all we need to know is whether there's at least ONE event on each day, nothing more.
             // So we loop through each event...
+            NSLog(@"current callendar events count: %lu", (unsigned long)[currentCalendar.events count]);
             for (MXLCalendarEvent *event in currentCalendar.events) {
-                NSLog(@"events: %@", event);
+                NSLog(@"events: %@", event.eventSummary);
+                NSLog(@"days array count: %lu", (unsigned long)[daysArray count]);
                 NSDateComponents *components = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit | NSDayCalendarUnit fromDate:[event eventStartDate]];
-                
-                // If the event starts this month, add it to the array
-                if ([components month] == month) {
-                    [daysArray addObject:[NSNumber numberWithInteger:[components day]]];
-                    [currentCalendar addEvent:event onDateString:[dateFormatter stringFromDate:[event eventStartDate]]];
-                    NSLog(@"dateString: %@", [dateFormatter stringFromDate:[event eventStartDate]]);
-                } else {
+
                     // We loop through each day, check if there's an event already there
                     // and if there is, we move onto the next one and repeat until we find a day WITHOUT an event on.
                     // Then we check if this current event occurs then.
@@ -65,10 +61,16 @@ static EKEventStore *eventStore = nil;
                             if ([event checkDay:i month:month year:year]) {
                                 [daysArray addObject:[NSNumber numberWithInteger:i]];
                                 [currentCalendar addEvent:event onDay:i month:month year:year];
+                                NSLog(@"days array count is now: %lu", (unsigned long)[daysArray count]);
                             }
                         }
                     }
-                }
+                    // If the event starts this month, add it to the array
+                    if ([components month] == month) {
+                            [daysArray addObject:[NSNumber numberWithInteger:[components day]]];
+                            [currentCalendar addEvent:event onDateString:[dateFormatter stringFromDate:[event eventStartDate]]];
+                            NSLog(@"trying to add %@ to this date: %@", [event eventSummary], [dateFormatter stringFromDate:[event eventStartDate]]);
+                    }
             }
             
             // Cache the events
@@ -107,10 +109,12 @@ static EKEventStore *eventStore = nil;
         if (![currentCalendar hasLoadedAllEventsForDate:date]) {
             // Loop through each event and check whether it occurs on the selected date
             for (MXLCalendarEvent *event in currentCalendar.events) {
+                NSLog(@"event count before: %lu", (unsigned long)[currentCalendar.events count]);
                 // If it does, save it for the date
                 if ([event checkDate:date]) {
                     [currentCalendar addEvent:event onDate:date];
                 }
+            NSLog(@"event count after: %lu", (unsigned long)[currentCalendar.events count]);
             }
             // Set that the calendar HAS loaded all the events for today
             [currentCalendar loadedAllEventsForDate:date];
@@ -161,9 +165,15 @@ static EKEventStore *eventStore = nil;
     }
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
+    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    NSString *string = [NSString stringWithFormat:@"%@ – %@", [[currentEvents objectAtIndex:indexPath.row] eventSummary], [dateFormatter stringFromDate:[[currentEvents objectAtIndex:indexPath.row] eventStartDate]]];
+    NSString *string = [NSString stringWithFormat:@"%@ – %@", [[currentEvents objectAtIndex:indexPath.row] eventSummary],
+                        [dateFormatter stringFromDate:[[currentEvents objectAtIndex:indexPath.row] eventStartDate]]];
+
     [cell.textLabel setText:string];
     
     return cell;
@@ -183,9 +193,9 @@ static EKEventStore *eventStore = nil;
     
 //    EKEventStore *store = [[EKEventStore alloc] init];
     
-    NSLog(@"Event: %@", currentEvent.eventDescription);
+    NSLog(@"Event: %@", currentEvent.eventSummary);
     NSLog(@"Event ID: %@", currentEvent.eventUniqueID);
-    NSLog(@"Descr: %@", currentEvent.eventSummary);
+    NSLog(@"Descr: %@", currentEvent.eventDescription);
     NSLog(@"Start: %@", currentEvent.eventStartDate);
     NSLog(@"End  : %@", currentEvent.eventEndDate);
 }
@@ -266,8 +276,8 @@ static EKEventStore *eventStore = nil;
     event.endDate = curEvent.eventEndDate;
     event.location = curEvent.eventLocation;
     
-//    NSURL *url = [NSURL URLWithString:@"calshow://"];
-//    [[UIApplication sharedApplication] openURL:url];
+    NSURL *url = [NSURL URLWithString:@"calshow://"];
+    [[UIApplication sharedApplication] openURL:url];
     
     NSError *error = nil;
     // save event to the callendar
@@ -299,7 +309,7 @@ static EKEventStore *eventStore = nil;
     eventsTableView.dataSource = self;
     
     MXLCalendarManager *calendarManager = [[MXLCalendarManager alloc] init];
-    NSURL *url = [NSURL URLWithString:@"http://www.google.com/calendar/ical/refugecf.com_eovqll344uloicj5ckkv8qpv30%40group.calendar.google.com/private-cbfebf6d4c4e241205cfe2a96603ce1f/basic.ics"];
+    NSURL *url = [NSURL URLWithString:@"http://www.google.com/calendar/ical/refugecf.com_eovqll344uloicj5ckkv8qpv30%40group.calendar.google.com/private-495f2109260f91ac39a59b2421eb8cc7/basic.ics?noCache"];
     
     [calendarManager scanICSFileAtRemoteURL:url withCompletionHandler:^(MXLCalendar *calendar, NSError *error) {
         currentCalendar = [[MXLCalendar alloc] init];

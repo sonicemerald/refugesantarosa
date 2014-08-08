@@ -134,6 +134,7 @@
             [eventScanner scanUpToString:@"DTSTART:" intoString:nil];
             [eventScanner scanUpToString:@"\n" intoString:&startDateTimeString];
             startDateTimeString = [[startDateTimeString stringByReplacingOccurrencesOfString:@"DTSTART:" withString:@""] stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            NSLog(@"start date time string: %@", startDateTimeString);
         }
         
         if (!startDateTimeString) {
@@ -189,6 +190,7 @@
         [eventScanner scanUpToString:@"DESCRIPTION:" intoString:nil];
         [eventScanner scanUpToString:@"\n" intoString:&descriptionString];
         descriptionString = [[[descriptionString stringByReplacingOccurrencesOfString:@"DESCRIPTION:" withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        NSLog(@"description: %@", descriptionString);
         
         // Extract last modified datetime
         eventScanner = [NSScanner scannerWithString:event];
@@ -270,6 +272,7 @@
                                                                exceptionDates:exceptionDates
                                                                 exceptionRule:exceptionRuleString
                                                            timeZoneIdentifier:calendarString];
+        NSLog(@"adding this event to calendar: %@", mevent.eventSummary);
         [calendar addEvent:mevent];
         
     }

@@ -91,6 +91,7 @@
             [dateFormatter setDateFormat:@"yyyyMMdd"];
             date = [dateFormatter dateFromString:dateString];
     }
+    NSLog(@"date is: %@", date);
     return date;
 }
 
@@ -265,6 +266,7 @@
 
 -(BOOL)checkDate:(NSDate *)date {
     
+    NSLog(@"checking the date: %@", date);
     // If the event starts in the future
     if ([self.eventStartDate compare:[NSDate date]] == NSOrderedDescending) {
         return NO;
@@ -359,7 +361,7 @@
                                                      inUnit: NSEraCalendarUnit forDate:date];
                 NSInteger difference = endDay-startDay;
                 // If the difference between the two dates fits the recurrance pattern
-                if (difference % [repeatRuleInterval integerValue])
+                if (difference % (7*[repeatRuleInterval integerValue]))
                     // If it doesn't fit into the pattern, it won't occur on this date
                     return NO;
                 else
@@ -382,7 +384,7 @@
                 NSInteger difference = endDay-startDay;
 
                 // If the difference between the two dates fits the recurrance pattern
-                if (difference % [repeatRuleInterval integerValue]) {
+                if (difference % (7*[repeatRuleInterval integerValue])) {
                     // if not, event won't occur on date
                     return NO;
                 } else {

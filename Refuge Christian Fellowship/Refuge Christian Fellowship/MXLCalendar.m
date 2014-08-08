@@ -58,6 +58,7 @@
 -(void)addEvent:(MXLCalendarEvent *)event onDateString:(NSString *)dateString {
     // Check if the event has already been logged today
     for (MXLCalendarEvent *currentEvent in [daysOfEvents objectForKey:dateString]) {
+        NSLog(@"daysofevent: %@", currentEvent.eventSummary);
         if ([currentEvent.eventUniqueID isEqualToString:event.eventUniqueID])
             return;
     }
@@ -65,17 +66,17 @@
     // If there are already events for this date...
     NSLog(@"dateString, %@", dateString);
     if ([daysOfEvents objectForKey:dateString]) {
-        NSLog(@"dateString, %@", dateString);
         // If the event has already been logged on this day, just return.
-        NSLog(@"dateString, %@", dateString);
         if ([[daysOfEvents objectForKey:dateString] containsObject:event])
             return;
 
         // If not, add it to the day
         [[daysOfEvents objectForKey:dateString] addObject:event];
+        NSLog(@"added event for, %@", dateString);
     } else {
         // If there are no current dates on today, create a new array and save it for the day
         [daysOfEvents setObject:[NSMutableArray arrayWithObject:event] forKey:dateString];
+        NSLog(@"logging %@ into daysOfEvent", event.eventSummary);
     }
 }
 
@@ -88,9 +89,11 @@
 
 -(void)loadedAllEventsForDate:(NSDate *)date {
     [loadedEvents setObject:[NSNumber numberWithBool:YES] forKey:date];
+    NSLog(@"loaded events: %lu", (unsigned long)[loadedEvents count]);
 }
 
 -(BOOL)hasLoadedAllEventsForDate:(NSDate *)date {
+    NSLog(@"has loaded events: %lu", (unsigned long)[loadedEvents count]);
     if ([loadedEvents objectForKey:date]) {
         return YES;
     } else {
