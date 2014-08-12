@@ -18,7 +18,7 @@
 
 #pragma mark - Select Date
 -(void)selectDate:(int)date {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
     if (self.timeZone)
         [gregorian setTimeZone:self.timeZone];

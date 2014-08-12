@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5414B313199A709C00647B07 /* ic_ref.png in Resources */ = {isa = PBXBuildFile; fileRef = 5414B312199A709C00647B07 /* ic_ref.png */; };
+		5414B315199A738C00647B07 /* ic_ref60.png in Resources */ = {isa = PBXBuildFile; fileRef = 5414B314199A738C00647B07 /* ic_ref60.png */; };
 		541EC69D1976D60300CE90AE /* MXLCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6961976D60300CE90AE /* MXLCalendar.m */; };
 		541EC69E1976D60300CE90AE /* MXLCalendarEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC6981976D60300CE90AE /* MXLCalendarEvent.m */; };
 		541EC69F1976D60300CE90AE /* MXLCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 541EC69A1976D60300CE90AE /* MXLCalendarManager.m */; };
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5414B312199A709C00647B07 /* ic_ref.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_ref.png; path = "Refuge Christian Fellowship/ic_ref.png"; sourceTree = "<group>"; };
+		5414B314199A738C00647B07 /* ic_ref60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_ref60.png; path = "Refuge Christian Fellowship/ic_ref60.png"; sourceTree = "<group>"; };
 		541EC6951976D60300CE90AE /* MXLCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXLCalendar.h; sourceTree = "<group>"; };
 		541EC6961976D60300CE90AE /* MXLCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXLCalendar.m; sourceTree = "<group>"; };
 		541EC6971976D60300CE90AE /* MXLCalendarEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXLCalendarEvent.h; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 		5423007C192C393200830A4C = {
 			isa = PBXGroup;
 			children = (
+				5414B314199A738C00647B07 /* ic_ref60.png */,
+				5414B312199A709C00647B07 /* ic_ref.png */,
 				5442479E196B73880087C259 /* download-128.png */,
 				5423008E192C393200830A4C /* Refuge Christian Fellowship */,
 				542300B3192C393200830A4C /* Refuge Christian FellowshipTests */,
@@ -403,6 +409,8 @@
 				5423009F192C393200830A4C /* Main_iPad.storyboard in Resources */,
 				542300A7192C393200830A4C /* Images.xcassets in Resources */,
 				5423009C192C393200830A4C /* Main_iPhone.storyboard in Resources */,
+				5414B315199A738C00647B07 /* ic_ref60.png in Resources */,
+				5414B313199A709C00647B07 /* ic_ref.png in Resources */,
 				5442479F196B73880087C259 /* download-128.png in Resources */,
 				54230093192C393200830A4C /* InfoPlist.strings in Resources */,
 			);
@@ -586,9 +594,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
 				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -603,9 +612,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
 				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

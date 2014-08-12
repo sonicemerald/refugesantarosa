@@ -16,6 +16,7 @@
 @interface rcfViewController ()
 
 @property (nonatomic) VRGCalendarView *vrgcal;
+@property (nonatomic) UITableView *vrgtable;
 @property (nonatomic) MXLCalendarEvent *currentEvent;
 
 @end
@@ -49,9 +50,18 @@ static EKEventStore *eventStore = nil;
             NSLog(@"current callendar events count: %lu", (unsigned long)[currentCalendar.events count]);
             for (MXLCalendarEvent *event in currentCalendar.events) {
                 NSLog(@"events: %@", event.eventSummary);
+                NSLog(@"Event strt date: %@", event.eventStartDate);
                 NSLog(@"days array count: %lu", (unsigned long)[daysArray count]);
-                NSDateComponents *components = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit | NSDayCalendarUnit fromDate:[event eventStartDate]];
-
+                NSDateComponents *components = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit | NSYearCalendarUnit | NSDayCalendarUnit fromDate:[event eventStartDate]];
+                
+//                // If the event starts this month, add it to the array
+//                if ([components month] == month && [components year] == year) {
+////                    if([daysArray containsObject:[NSNumber numberWithInteger:[components day]]]){
+//                    [daysArray addObject:[NSNumber numberWithInteger:[components day]]];
+//                    [currentCalendar addEvent:event onDateString:[dateFormatter stringFromDate:[event eventStartDate]]];
+//                    NSLog(@"trying to add %@ to this date: %@", [event eventSummary], [dateFormatter stringFromDate:[event eventStartDate]]);
+////                    }
+//                } else {
                     // We loop through each day, check if there's an event already there
                     // and if there is, we move onto the next one and repeat until we find a day WITHOUT an event on.
                     // Then we check if this current event occurs then.
@@ -65,12 +75,7 @@ static EKEventStore *eventStore = nil;
                             }
                         }
                     }
-                    // If the event starts this month, add it to the array
-                    if ([components month] == month) {
-                            [daysArray addObject:[NSNumber numberWithInteger:[components day]]];
-                            [currentCalendar addEvent:event onDateString:[dateFormatter stringFromDate:[event eventStartDate]]];
-                            NSLog(@"trying to add %@ to this date: %@", [event eventSummary], [dateFormatter stringFromDate:[event eventStartDate]]);
-                    }
+                
             }
             
             // Cache the events
@@ -141,7 +146,7 @@ static EKEventStore *eventStore = nil;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             NSLog(@"How did date become this? %@", date);
             selectedDate = date;
-            [eventsTableView reloadData];
+            [self.vrgtable reloadData];
         });
     });
 }
@@ -183,13 +188,24 @@ static EKEventStore *eventStore = nil;
     MXLCalendarEvent *currentEvent = [[currentCalendar eventsForDate:selectedDate] objectAtIndex:indexPath.row];
     
     self.currentEvent = currentEvent;
-//    [self setUpCalendarWithEvent:self.currentEvent];
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:currentEvent.eventDescription
-                                                      message:currentEvent.eventSummary
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+
+    NSString *string = [NSString stringWithFormat:@"%@ – %@", [[currentEvents objectAtIndex:indexPath.row] eventSummary],
+                        [dateFormatter stringFromDate:[[currentEvents objectAtIndex:indexPath.row] eventStartDate]]];
+
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:string
+                                                      message:currentEvent.eventDescription
                                                      delegate:self
-                                            cancelButtonTitle:@"Ok"
+                                            cancelButtonTitle:@"OK"
                                             otherButtonTitles:@"Add to Calendar", nil];
     [message show];
+    [self.vrgtable deselectRowAtIndexPath:indexPath animated:YES];
     
 //    EKEventStore *store = [[EKEventStore alloc] init];
     
@@ -297,19 +313,29 @@ static EKEventStore *eventStore = nil;
 {
     [super viewDidLoad];
     
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    
     savedDates = [[NSMutableDictionary alloc] init];
     
     self.vrgcal = [[VRGCalendarView alloc] init];
-    [self.vrgcal setFrame:CGRectMake(0.0f, 20.0f, 320.0f, 320.0f)];
+    [self.vrgcal setFrame:CGRectMake(0.0f, 20.0f, screenWidth, 320.0f)];
     [self.vrgcal setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"PDT"]];
     
     [self.vrgcal setDelegate:self];
     [self.view addSubview:self.vrgcal];
-    eventsTableView.delegate = self;
-    eventsTableView.dataSource = self;
+    
+    self.vrgtable = [[UITableView alloc] init];
+    [self.vrgtable setFrame:CGRectMake(0.0f, 320.0f, screenWidth, screenHeight-340.0f-30.0f)];
+    [self.view addSubview:self.vrgtable];
+    self.vrgtable.delegate = self;
+    self.vrgtable.dataSource = self;
+//    eventsTableView.delegate = self;
+//    eventsTableView.dataSource = self;
     
     MXLCalendarManager *calendarManager = [[MXLCalendarManager alloc] init];
-    NSURL *url = [NSURL URLWithString:@"http://www.google.com/calendar/ical/refugecf.com_eovqll344uloicj5ckkv8qpv30%40group.calendar.google.com/private-495f2109260f91ac39a59b2421eb8cc7/basic.ics?noCache"];
+    NSURL *url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/oklcbmldnd0k2c4md0map7gmpk%40group.calendar.google.com/private-a86342ecf780d4f21b413202890a27e3/basic.ics"];
     
     [calendarManager scanICSFileAtRemoteURL:url withCompletionHandler:^(MXLCalendar *calendar, NSError *error) {
         currentCalendar = [[MXLCalendar alloc] init];
@@ -318,7 +344,7 @@ static EKEventStore *eventStore = nil;
         [self calendarView:self.vrgcal switchedToMonth:[components month] year:[components year] numOfDays:[[NSDate date] numDaysInMonth] targetHeight:[self.vrgcal calendarHeight] animated:NO];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [eventsTableView reloadData];
+            [self.vrgtable reloadData];
             
         });
     }];
@@ -332,7 +358,6 @@ static EKEventStore *eventStore = nil;
             // you don't have permissions to access calendars
         }
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning

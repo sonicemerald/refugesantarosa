@@ -1,3 +1,4 @@
+
 //
 //  rcfAppDelegate.m
 //  Refuge Christian Fellowship
@@ -7,6 +8,7 @@
 //
 
 #import "rcfAppDelegate.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @implementation rcfAppDelegate
 
@@ -20,13 +22,13 @@
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTranslucent:NO];
+    //[[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:68.0/255.0f green:68.0/255.0f blue:68.0/255.0f alpha:1.0]}]; //title text tint is grey
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]]; //tint is teal
 
     
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-    [[UITabBar appearance] setTranslucent:NO];
+    //[[UITabBar appearance] setTranslucent:NO];
 
     //Selected Tab is teal
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:48/255.0f green:113/255.0f blue:121/255.0f alpha:1.0f]];
@@ -78,6 +80,25 @@
                     [self.audioPlayer play];
                     //[self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
                 }
+                break;
+            case UIEventSubtypeRemoteControlNextTrack:
+            {
+                CMTime fifteen = CMTimeMakeWithSeconds(15, 6000);
+                CMTime time = CMTimeAdd([self.audioPlayer currentTime], fifteen);
+                [self.audioPlayer seekToTime:time];
+                
+                
+            }
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:
+            {
+                CMTime fifteen = CMTimeMakeWithSeconds(-15, 6000);
+                CMTime time = CMTimeAdd([self.audioPlayer currentTime], fifteen);
+                [self.audioPlayer seekToTime:time];
+//                [[[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo] setValue:[self.audioPlayer currentTime] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+//                
+//                [[[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo] setObject:[NSNumber numberWithDouble:([self.audioPlayer currentTime].value / [self.audioPlayer currentTime].timescale)] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime]
+            }
                 break;
             default:
                 break;

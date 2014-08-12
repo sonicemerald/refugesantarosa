@@ -267,6 +267,8 @@
 -(BOOL)checkDate:(NSDate *)date {
     
     NSLog(@"checking the date: %@", date);
+    NSLog(@"self.eventStartDAte = %@", self.eventStartDate);
+    
     // If the event starts in the future
     if ([self.eventStartDate compare:[NSDate date]] == NSOrderedDescending) {
         return NO;

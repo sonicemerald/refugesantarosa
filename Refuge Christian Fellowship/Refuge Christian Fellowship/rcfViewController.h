@@ -12,7 +12,7 @@
 
 @interface rcfViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, VRGCalendarViewDelegate> {
     
-    IBOutlet UITableView *eventsTableView;
+//    IBOutlet UITableView *eventsTableView;
     MXLCalendar *currentCalendar;
     
     NSDate *selectedDate;

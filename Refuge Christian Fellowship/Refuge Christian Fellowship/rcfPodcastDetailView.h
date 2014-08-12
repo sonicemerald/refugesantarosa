@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *elapsedTime;
 @property (weak, nonatomic) IBOutlet UILabel *totalTime;
 @property (weak, nonatomic) IBOutlet UIButton *playpausebtn;
+@property (weak, nonatomic) IBOutlet UIButton *minus15;
+@property (weak, nonatomic) IBOutlet UIButton *plus15;
 @property (strong, nonatomic) AVPlayer *audioPlayer;
 @property (nonatomic) NSTimer *playbackTimer;
 @property (weak, nonatomic) IBOutlet UILabel *loading;

@@ -47,7 +47,9 @@
     self.cantplay = NO;
     
     [self.playpausebtn setTitle:@"Pause" forState:UIControlStateNormal];
+    [self.minus15 addTarget:self action:@selector(didPressMinus15) forControlEvents:UIControlEventTouchUpInside];
     [self.playpausebtn addTarget:self action:@selector(didPressPlay:) forControlEvents:UIControlEventTouchUpInside];
+    [self.plus15 addTarget:self action:@selector(didPressPlus15) forControlEvents:UIControlEventTouchUpInside];
     [self.audioPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
     NSError *setCategoryError = nil;
     NSError *activationError = nil;
@@ -306,12 +308,28 @@
         NSLog(@"Pausing audio");
     }
 }
+
+-(void)didPressMinus15{
+    CMTime fifteen = CMTimeMakeWithSeconds(-115, 6000);
+    CMTime time = CMTimeAdd([self.audioPlayer currentTime], fifteen);
+    [self.audioPlayer seekToTime:time];
+//    [self.audioPlayer see]
+}
+
+-(void)didPressPlus15{
+    CMTime fifteen = CMTimeMakeWithSeconds(15, 6000);
+    CMTime time = CMTimeAdd([self.audioPlayer currentTime], fifteen);
+    [self.audioPlayer seekToTime:time];
+
+}
+
 - (void)setUpRemoteControl{
     
     self.songInfo = [[NSMutableDictionary alloc] init];
     [self.songInfo setObject:self.podcast.subtitle forKey:MPMediaItemPropertyTitle];
     [self.songInfo setObject:self.podcast.author forKey:MPMediaItemPropertyArtist];
     [self.songInfo setObject:self.podcast.title forKey:MPMediaItemPropertyAlbumTitle];
+      
     MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage:self.artwork];
     [self.songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
     NSLog(@"%@", self.songInfo);

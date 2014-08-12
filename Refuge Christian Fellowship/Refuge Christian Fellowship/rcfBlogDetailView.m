@@ -23,16 +23,19 @@
 
 -(void) viewDidLoad{
     
-    self.view.backgroundColor = [UIColor redColor];
-    float width = [UIScreen mainScreen].bounds.size.width;
-    float height = [UIScreen mainScreen].bounds.size.height;
-    CGRect frame = CGRectMake(0, -60, width, height);
-    self.webview = [[UIWebView alloc] initWithFrame:frame];
-    [self.view addSubview:self.webview];
     
+//    float width = [UIScreen mainScreen].bounds.size.width;
+//    float height = [UIScreen mainScreen].bounds.size.height;
+//    self.view.frame = CGRectMake(0.0f, 20.0f, width, height);
+//    CGRect frame = CGRectMake(0.0f, -60.0f, width, height+220.0f);
+//    self.webview = [[UIWebView alloc] initWithFrame:frame];
+//    [self.view addSubview:self.webview];
+    self.webview = [[UIWebView alloc] init];
     self.webview.backgroundColor = [UIColor colorWithRed:245/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f];
     
     self.webview.scrollView.bounces = NO;
+    [self.view addSubview:self.webview];
+    
     self.activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
     // Set Center Position for ActivityIndicator
@@ -46,6 +49,16 @@
     [super viewDidLoad];
 }
 
+-(void) viewWillLayoutSubviews{
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    CGFloat height = CGRectGetHeight(self.view.bounds);
+    self.view.frame = CGRectMake(0.0f, 20.0f, width, height);
+    CGRect frame = CGRectMake(0.0f, -80.0f, width, height+220.0f);
+    self.webview.frame = frame;
+}
+
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{}
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [self.activityIndicatorObject startAnimating];

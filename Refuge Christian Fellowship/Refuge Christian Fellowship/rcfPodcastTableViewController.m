@@ -292,7 +292,7 @@
     static NSURLSession *backgroundSession = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.micahgemmell.rcf.Refuge Christian Fellowship.BackgroundSession"];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.micahgemmell.rcf.Refuge Christian Fellowship.BackgroundSession"]; // backgroundSessionConfigurationWithIdentifier:@"com.micahgemmell.rcf.Refuge Christian Fellowship.BackgroundSession"];
         
         backgroundSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     });
