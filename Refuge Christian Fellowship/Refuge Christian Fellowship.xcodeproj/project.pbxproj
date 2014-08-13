@@ -40,6 +40,8 @@
 		542300D4192DD11F00830A4C /* rcfPodcastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300D3192DD11F00830A4C /* rcfPodcastTableViewCell.m */; };
 		5442479F196B73880087C259 /* download-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 5442479E196B73880087C259 /* download-128.png */; };
 		5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */; };
+		547AEA04199BC08000C841B2 /* rcfQuoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 547AEA03199BC08000C841B2 /* rcfQuoteViewController.m */; };
+		547AEA07199BD7BA00C841B2 /* splash640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 547AEA06199BD7BA00C841B2 /* splash640x1136.png */; };
 		54AD48CF1967AEC00088D4F4 /* rcfBlogParseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */; };
 		54AD48D41967BB5E0088D4F4 /* rcfBlogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48D31967BB5E0088D4F4 /* rcfBlogTableViewController.m */; };
 		54AD48D71967BEA40088D4F4 /* rcfBlogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AD48D61967BEA40088D4F4 /* rcfBlogTableViewCell.m */; };
@@ -113,6 +115,9 @@
 		5442479E196B73880087C259 /* download-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download-128.png"; sourceTree = "<group>"; };
 		5472874B1933B5FA00AE68D0 /* rcfPodcastDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfPodcastDetailView.h; sourceTree = "<group>"; };
 		5472874C1933B5FA00AE68D0 /* rcfPodcastDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfPodcastDetailView.m; sourceTree = "<group>"; };
+		547AEA02199BC08000C841B2 /* rcfQuoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfQuoteViewController.h; sourceTree = "<group>"; };
+		547AEA03199BC08000C841B2 /* rcfQuoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfQuoteViewController.m; sourceTree = "<group>"; };
+		547AEA06199BD7BA00C841B2 /* splash640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash640x1136.png; path = "Refuge Christian Fellowship/images/splash640x1136.png"; sourceTree = "<group>"; };
 		54AD48CD1967AEC00088D4F4 /* rcfBlogParseOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcfBlogParseOperation.h; sourceTree = "<group>"; };
 		54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcfBlogParseOperation.m; sourceTree = "<group>"; };
 		54AD48D01967AF280088D4F4 /* rcfBlog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfBlog.h; sourceTree = "<group>"; };
@@ -188,9 +193,7 @@
 		5423007C192C393200830A4C = {
 			isa = PBXGroup;
 			children = (
-				5414B314199A738C00647B07 /* ic_ref60.png */,
-				5414B312199A709C00647B07 /* ic_ref.png */,
-				5442479E196B73880087C259 /* download-128.png */,
+				547AEA05199BD7A100C841B2 /* images */,
 				5423008E192C393200830A4C /* Refuge Christian Fellowship */,
 				542300B3192C393200830A4C /* Refuge Christian FellowshipTests */,
 				54230087192C393200830A4C /* Frameworks */,
@@ -272,6 +275,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		547AEA05199BD7A100C841B2 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				547AEA06199BD7BA00C841B2 /* splash640x1136.png */,
+				5414B314199A738C00647B07 /* ic_ref60.png */,
+				5414B312199A709C00647B07 /* ic_ref.png */,
+				5442479E196B73880087C259 /* download-128.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		54AD48D11967AF860088D4F4 /* rcfPodcast */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +300,8 @@
 		54AD48D21967AFB50088D4F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				547AEA02199BC08000C841B2 /* rcfQuoteViewController.h */,
+				547AEA03199BC08000C841B2 /* rcfQuoteViewController.m */,
 				541EC6A11976DA4100CE90AE /* VRGCalendarView */,
 				542300A3192C393200830A4C /* rcfViewController.h */,
 				542300A4192C393200830A4C /* rcfViewController.m */,
@@ -411,6 +427,7 @@
 				5423009C192C393200830A4C /* Main_iPhone.storyboard in Resources */,
 				5414B315199A738C00647B07 /* ic_ref60.png in Resources */,
 				5414B313199A709C00647B07 /* ic_ref.png in Resources */,
+				547AEA07199BD7BA00C841B2 /* splash640x1136.png in Resources */,
 				5442479F196B73880087C259 /* download-128.png in Resources */,
 				54230093192C393200830A4C /* InfoPlist.strings in Resources */,
 			);
@@ -453,6 +470,7 @@
 				541EC6AE1976DA4100CE90AE /* UIColor+expanded.m in Sources */,
 				542300A5192C393200830A4C /* rcfViewController.m in Sources */,
 				541EC69F1976D60300CE90AE /* MXLCalendarManager.m in Sources */,
+				547AEA04199BC08000C841B2 /* rcfQuoteViewController.m in Sources */,
 				541EC6AF1976DA4100CE90AE /* UIView+convenience.m in Sources */,
 				541EC6A01976D60300CE90AE /* NSTimeZone+ProperAbbreviation.m in Sources */,
 			);

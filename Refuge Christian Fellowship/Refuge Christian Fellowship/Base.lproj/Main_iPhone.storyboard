@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -210,11 +211,69 @@
             </objects>
             <point key="canvasLocation" x="1227" y="-729"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--More-->
+        <scene sceneID="TQw-sX-0e6">
+            <objects>
+                <viewController id="E6N-9L-qpO" userLabel="More" customClass="rcfQuoteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NYU-B7-O02"/>
+                        <viewControllerLayoutGuide type="bottom" id="XAx-hE-vUE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HBd-s9-AgU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="QYy-4I-q4b">
+                                <rect key="frame" x="11" y="51" width="298" height="290"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">"...you either have to say that Jesus Christ is, as the Bible claims, the unique Creator God who has come in the flesh (offering life through his death and new life) which makes Christianity a better revelation than other religions - or you have to say that he was wrong or lying, which makes him and his followers a worse revelation of God. But christianity cannot be a religion just like the rest.”</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="~ Tim Keller" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97O-BC-iDo">
+                                <rect key="frame" x="222" y="349" width="92" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Quotes" id="xCq-rU-vY3"/>
+                    <connections>
+                        <outlet property="QuoteBody" destination="QYy-4I-q4b" id="3Yd-h4-Y6s"/>
+                        <outlet property="dothQuoted" destination="97O-BC-iDo" id="zDN-g0-Eyo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="awr-E2-61Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="324" y="1240"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0Gq-IX-gdW">
+            <objects>
+                <viewController id="OhQ-lf-r0k" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WCz-It-lwn"/>
+                        <viewControllerLayoutGuide type="bottom" id="VLe-wc-JkB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SYO-Og-uf8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" enabled="NO" systemItem="more" id="UEt-ft-4Qg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vHQ-TP-V9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="727" y="1228"/>
+        </scene>
+        <!--Navigation Controller - Read-->
         <scene sceneID="jAV-ZR-NKh">
             <objects>
                 <navigationController id="n1q-FX-Sqi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="iIo-4G-yKd"/>
+                    <tabBarItem key="tabBarItem" title="Read" id="iIo-4G-yKd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bFQ-Oz-jxa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -323,7 +382,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Bulletin" image="second" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Calendar" image="second" id="Z7h-1E-pvt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
@@ -340,9 +399,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="QUy-BD-bpt" kind="relationship" relationship="viewControllers" id="M8t-EP-wfW"/>
+                        <segue destination="E6N-9L-qpO" kind="relationship" relationship="viewControllers" id="K8c-mf-4f8"/>
                         <segue destination="b1H-8s-33X" kind="relationship" relationship="viewControllers" id="X12-z4-3NI"/>
                         <segue destination="n1q-FX-Sqi" kind="relationship" relationship="viewControllers" id="bkG-kD-oju"/>
+                        <segue destination="QUy-BD-bpt" kind="relationship" relationship="viewControllers" id="M8t-EP-wfW"/>
+                        <segue destination="OhQ-lf-r0k" kind="relationship" relationship="viewControllers" id="urW-UT-wZc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
