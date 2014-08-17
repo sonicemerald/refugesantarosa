@@ -158,6 +158,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5401A32419A0636300E9169D /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				541EC6941976D48700CE90AE /* MXLCalendarManager */,
+				541EC6A11976DA4100CE90AE /* VRGCalendarView */,
+				542300A3192C393200830A4C /* rcfCalendarViewController.h */,
+				542300A4192C393200830A4C /* rcfCalendarViewController.m */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
 		541EC6941976D48700CE90AE /* MXLCalendarManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,10 +236,6 @@
 		5423008E192C393200830A4C /* Refuge Christian Fellowship */ = {
 			isa = PBXGroup;
 			children = (
-				54AD48CD1967AEC00088D4F4 /* rcfBlogParseOperation.h */,
-				54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */,
-				54D0962F1961C398005F8CC6 /* OBSlider.h */,
-				54D096301961C398005F8CC6 /* OBSlider.m */,
 				54230097192C393200830A4C /* rcfAppDelegate.h */,
 				54230098192C393200830A4C /* rcfAppDelegate.m */,
 				5423009A192C393200830A4C /* Main_iPhone.storyboard */,
@@ -236,9 +243,6 @@
 				54AD48D21967AFB50088D4F4 /* Views */,
 				542300A6192C393200830A4C /* Images.xcassets */,
 				5423008F192C393200830A4C /* Supporting Files */,
-				54AD48D11967AF860088D4F4 /* rcfPodcast */,
-				54AD48D01967AF280088D4F4 /* rcfBlog.h */,
-				54AD48DC1967C9810088D4F4 /* rcfBlog.m */,
 			);
 			path = "Refuge Christian Fellowship";
 			sourceTree = "<group>";
@@ -248,7 +252,6 @@
 			children = (
 				541EC6B11976DB7E00CE90AE /* MBProgressHUD.h */,
 				541EC6B21976DB7E00CE90AE /* MBProgressHUD.m */,
-				541EC6941976D48700CE90AE /* MXLCalendarManager */,
 				54230090192C393200830A4C /* Refuge Christian Fellowship-Info.plist */,
 				54230091192C393200830A4C /* InfoPlist.strings */,
 				54230094192C393200830A4C /* main.m */,
@@ -286,25 +289,12 @@
 			name = images;
 			sourceTree = "<group>";
 		};
-		54AD48D11967AF860088D4F4 /* rcfPodcast */ = {
-			isa = PBXGroup;
-			children = (
-				542300CC192C6C1F00830A4C /* rcfPodcast.h */,
-				542300CD192C6C1F00830A4C /* rcfPodcast.m */,
-				542300CF192D600800830A4C /* rcfPodcastParseOperation.h */,
-				542300D0192D600800830A4C /* rcfPodcastParseOperation.m */,
-			);
-			name = rcfPodcast;
-			sourceTree = "<group>";
-		};
 		54AD48D21967AFB50088D4F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5401A32419A0636300E9169D /* Calendar */,
 				547AEA02199BC08000C841B2 /* rcfQuoteViewController.h */,
 				547AEA03199BC08000C841B2 /* rcfQuoteViewController.m */,
-				541EC6A11976DA4100CE90AE /* VRGCalendarView */,
-				542300A3192C393200830A4C /* rcfCalendarViewController.h */,
-				542300A4192C393200830A4C /* rcfCalendarViewController.m */,
 				54AD48DF196855F40088D4F4 /* Podcast */,
 				54AD48DE196855E40088D4F4 /* Blog */,
 			);
@@ -314,6 +304,10 @@
 		54AD48DE196855E40088D4F4 /* Blog */ = {
 			isa = PBXGroup;
 			children = (
+				54AD48CD1967AEC00088D4F4 /* rcfBlogParseOperation.h */,
+				54AD48CE1967AEC00088D4F4 /* rcfBlogParseOperation.m */,
+				54AD48D01967AF280088D4F4 /* rcfBlog.h */,
+				54AD48DC1967C9810088D4F4 /* rcfBlog.m */,
 				54AD48D31967BB5E0088D4F4 /* rcfBlogTableViewController.m */,
 				54AD48D51967BBBC0088D4F4 /* rcfBlogTableViewController.h */,
 				54AD48D61967BEA40088D4F4 /* rcfBlogTableViewCell.m */,
@@ -327,6 +321,12 @@
 		54AD48DF196855F40088D4F4 /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				54D0962F1961C398005F8CC6 /* OBSlider.h */,
+				54D096301961C398005F8CC6 /* OBSlider.m */,
+				542300CC192C6C1F00830A4C /* rcfPodcast.h */,
+				542300CD192C6C1F00830A4C /* rcfPodcast.m */,
+				542300CF192D600800830A4C /* rcfPodcastParseOperation.h */,
+				542300D0192D600800830A4C /* rcfPodcastParseOperation.m */,
 				542300C9192C55F100830A4C /* rcfPodcastTableViewController.h */,
 				542300CA192C55F100830A4C /* rcfPodcastTableViewController.m */,
 				542300D2192DD11F00830A4C /* rcfPodcastTableViewCell.h */,
