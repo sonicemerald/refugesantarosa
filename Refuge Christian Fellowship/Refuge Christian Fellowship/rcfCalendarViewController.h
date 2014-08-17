@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "VRGCalendarView.h"
 @class MXLCalendar;
+@class MXLCalendarManager;
 
 @interface rcfCalendarViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, VRGCalendarViewDelegate> {
     
 //    IBOutlet UITableView *eventsTableView;
     MXLCalendar *currentCalendar;
-    
+    MXLCalendarManager *calendarManager;
     NSDate *selectedDate;
     NSMutableDictionary *savedDates;
     

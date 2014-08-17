@@ -316,6 +316,7 @@ static EKEventStore *eventStore = nil;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
+  
     
     savedDates = [[NSMutableDictionary alloc] init];
     
@@ -324,30 +325,19 @@ static EKEventStore *eventStore = nil;
     [self.vrgcal setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"PDT"]];
     
     [self.vrgcal setDelegate:self];
-    [self.view addSubview:self.vrgcal];
+    
     
     self.vrgtable = [[UITableView alloc] init];
     [self.vrgtable setFrame:CGRectMake(0.0f, 320.0f, screenWidth, screenHeight-340.0f-30.0f)];
-    [self.view addSubview:self.vrgtable];
+    
     self.vrgtable.delegate = self;
     self.vrgtable.dataSource = self;
 //    eventsTableView.delegate = self;
 //    eventsTableView.dataSource = self;
+    currentCalendar = [[MXLCalendar alloc] init];
     
-    MXLCalendarManager *calendarManager = [[MXLCalendarManager alloc] init];
-    NSURL *url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/oklcbmldnd0k2c4md0map7gmpk%40group.calendar.google.com/private-a86342ecf780d4f21b413202890a27e3/basic.ics"];
+    calendarManager = [[MXLCalendarManager alloc] init];
     
-    [calendarManager scanICSFileAtRemoteURL:url withCompletionHandler:^(MXLCalendar *calendar, NSError *error) {
-        currentCalendar = [[MXLCalendar alloc] init];
-        currentCalendar = calendar;
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
-        [self calendarView:self.vrgcal switchedToMonth:[components month] year:[components year] numOfDays:[[NSDate date] numDaysInMonth] targetHeight:[self.vrgcal calendarHeight] animated:NO];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.vrgtable reloadData];
-            
-        });
-    }];
     // Do any additional setup after loading the view, typically from a nib.
     
     [rcfCalendarViewController requestAccess:^(BOOL granted, NSError *error) {
@@ -356,6 +346,46 @@ static EKEventStore *eventStore = nil;
         } else {
             NSLog(@"no premissions to use calendar");
             // you don't have permissions to access calendars
+        }
+    }];
+}
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSURL *url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/oklcbmldnd0k2c4md0map7gmpk%40group.calendar.google.com/private-a86342ecf780d4f21b413202890a27e3/basic.ics"];
+    MBProgressHUD *loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [loadingHUD setMode:MBProgressHUDModeIndeterminate];
+    [loadingHUD setLabelText:@"Loading..."];
+    
+    [calendarManager scanICSFileAtRemoteURL:url withCompletionHandler:^(MXLCalendar *calendar, NSError *error) {
+        if (calendar != nil){
+            
+            currentCalendar = calendar;
+            
+            
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+            [self calendarView:self.vrgcal switchedToMonth:[components month] year:[components year] numOfDays:[[NSDate date] numDaysInMonth] targetHeight:[self.vrgcal calendarHeight] animated:NO];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.vrgtable reloadData];
+                [self.view addSubview:self.vrgcal];
+                [self.view addSubview:self.vrgtable];
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                
+            });
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
+                                                                message:@"You must be connected to the internet to use this app."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                
+                [alert show];
+            });
+            
         }
     }];
 }
