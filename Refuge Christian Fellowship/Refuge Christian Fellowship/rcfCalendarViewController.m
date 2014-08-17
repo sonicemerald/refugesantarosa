@@ -307,8 +307,6 @@ static EKEventStore *eventStore = nil;
     }
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -332,10 +330,8 @@ static EKEventStore *eventStore = nil;
     
     self.vrgtable.delegate = self;
     self.vrgtable.dataSource = self;
-//    eventsTableView.delegate = self;
-//    eventsTableView.dataSource = self;
+  
     currentCalendar = [[MXLCalendar alloc] init];
-    
     calendarManager = [[MXLCalendarManager alloc] init];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -352,7 +348,7 @@ static EKEventStore *eventStore = nil;
 -(void) viewDidAppear:(BOOL)animated
 {
     NSURL *url = [NSURL URLWithString:@"https://www.google.com/calendar/ical/oklcbmldnd0k2c4md0map7gmpk%40group.calendar.google.com/private-a86342ecf780d4f21b413202890a27e3/basic.ics"];
-    MBProgressHUD *loadingHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *loadingHUD = [MBProgressHUD showHUDAddedTo:self.view.superview animated:YES];
     [loadingHUD setMode:MBProgressHUDModeIndeterminate];
     [loadingHUD setLabelText:@"Loading..."];
     
@@ -366,6 +362,7 @@ static EKEventStore *eventStore = nil;
             [self calendarView:self.vrgcal switchedToMonth:[components month] year:[components year] numOfDays:[[NSDate date] numDaysInMonth] targetHeight:[self.vrgcal calendarHeight] animated:NO];
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:self.view.superview animated:YES];
                 [self.vrgtable reloadData];
                 [self.view addSubview:self.vrgcal];
                 [self.view addSubview:self.vrgtable];
@@ -376,7 +373,7 @@ static EKEventStore *eventStore = nil;
         else
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [MBProgressHUD hideAllHUDsForView:self.view.superview animated:YES];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
                                                                 message:@"You must be connected to the internet to use this app."
                                                                delegate:nil
