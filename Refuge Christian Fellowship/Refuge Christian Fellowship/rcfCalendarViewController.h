@@ -10,7 +10,7 @@
 #import "VRGCalendarView.h"
 @class MXLCalendar;
 
-@interface rcfViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, VRGCalendarViewDelegate> {
+@interface rcfCalendarViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, VRGCalendarViewDelegate> {
     
 //    IBOutlet UITableView *eventsTableView;
     MXLCalendar *currentCalendar;

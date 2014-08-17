@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "rcfBlogDetailView.H"
 
+
 @implementation rcfBlogDetailView
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -53,8 +54,20 @@
     CGFloat width = CGRectGetWidth(self.view.bounds);
     CGFloat height = CGRectGetHeight(self.view.bounds);
     self.view.frame = CGRectMake(0.0f, 20.0f, width, height);
-    CGRect frame = CGRectMake(0.0f, -80.0f, width, height+220.0f);
-    self.webview.frame = frame;
+    NSLog(@"height: %f", height);
+    if(height == 480){ //3.5 inch Screen
+        CGRect frame = CGRectMake(0.0f, -40.0f, width, height+200.0f);
+        self.webview.frame = frame;
+    } else if (([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending)) {
+        //if (height == 568){ // 4 inch screen
+        CGRect frame = CGRectMake(0.0f, -40.0f, width, height+110);
+        self.webview.frame = frame;
+    } else {
+        CGRect frame = CGRectMake(0.0f, -80.0f, width, height+220.0f);
+        self.webview.frame = frame;
+    }
+    
+
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation

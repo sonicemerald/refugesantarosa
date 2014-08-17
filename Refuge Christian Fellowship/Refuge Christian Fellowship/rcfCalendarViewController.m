@@ -7,13 +7,13 @@
 //  Copyright (c) 2014 RefugeCF. All rights reserved.
 //
 
-#import "rcfViewController.h"
+#import "rcfCalendarViewController.h"
 #import "MXLCalendarManager.h"
 #import "MBProgressHUD.h"
 #import "NSDate+convenience.h"
 #import <EventKit/EventKit.h>
 
-@interface rcfViewController ()
+@interface rcfCalendarViewController ()
 
 @property (nonatomic) VRGCalendarView *vrgcal;
 @property (nonatomic) UITableView *vrgtable;
@@ -23,7 +23,7 @@
 
 static EKEventStore *eventStore = nil;
 
-@implementation rcfViewController
+@implementation rcfCalendarViewController
 
 -(void)calendarView:(VRGCalendarView *)calendarView switchedToMonth:(int)month year:(int)year numOfDays:(int)days targetHeight:(float)targetHeight animated:(BOOL)animated {
     // If this month hasn't already loaded and been cached, start loading events
@@ -350,7 +350,7 @@ static EKEventStore *eventStore = nil;
     }];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [rcfViewController requestAccess:^(BOOL granted, NSError *error) {
+    [rcfCalendarViewController requestAccess:^(BOOL granted, NSError *error) {
         if (granted) {
             NSLog(@"granted access");
         } else {

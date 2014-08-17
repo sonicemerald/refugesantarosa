@@ -369,10 +369,10 @@
             </objects>
             <point key="canvasLocation" x="1146" y="615"/>
         </scene>
-        <!--Rcf View Controller - Second-->
+        <!--Rcf Calendar View Controller - Second-->
         <scene sceneID="ot8-2e-RuS">
             <objects>
-                <viewController title="Second" id="QUy-BD-bpt" customClass="rcfViewController" sceneMemberID="viewController">
+                <viewController title="Second" id="QUy-BD-bpt" customClass="rcfCalendarViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M4c-r7-Rgc"/>
                         <viewControllerLayoutGuide type="bottom" id="vpR-2b-gKw"/>
