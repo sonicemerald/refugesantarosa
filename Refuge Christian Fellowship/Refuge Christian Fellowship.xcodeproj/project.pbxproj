@@ -27,7 +27,7 @@
 		54230099192C393200830A4C /* rcfAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54230098192C393200830A4C /* rcfAppDelegate.m */; };
 		5423009C192C393200830A4C /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5423009A192C393200830A4C /* Main_iPhone.storyboard */; };
 		5423009F192C393200830A4C /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5423009D192C393200830A4C /* Main_iPad.storyboard */; };
-		542300A5192C393200830A4C /* rcfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300A4192C393200830A4C /* rcfViewController.m */; };
+		542300A5192C393200830A4C /* rcfCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542300A4192C393200830A4C /* rcfCalendarViewController.m */; };
 		542300A7192C393200830A4C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542300A6192C393200830A4C /* Images.xcassets */; };
 		542300AE192C393200830A4C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542300AD192C393200830A4C /* XCTest.framework */; };
 		542300AF192C393200830A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54230088192C393200830A4C /* Foundation.framework */; };
@@ -96,8 +96,8 @@
 		54230098192C393200830A4C /* rcfAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfAppDelegate.m; sourceTree = "<group>"; };
 		5423009B192C393200830A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		5423009E192C393200830A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		542300A3192C393200830A4C /* rcfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfViewController.h; sourceTree = "<group>"; };
-		542300A4192C393200830A4C /* rcfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfViewController.m; sourceTree = "<group>"; };
+		542300A3192C393200830A4C /* rcfCalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcfCalendarViewController.h; sourceTree = "<group>"; };
+		542300A4192C393200830A4C /* rcfCalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcfCalendarViewController.m; sourceTree = "<group>"; };
 		542300A6192C393200830A4C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		542300AC192C393200830A4C /* Refuge Christian FellowshipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Refuge Christian FellowshipTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		542300AD192C393200830A4C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -303,8 +303,8 @@
 				547AEA02199BC08000C841B2 /* rcfQuoteViewController.h */,
 				547AEA03199BC08000C841B2 /* rcfQuoteViewController.m */,
 				541EC6A11976DA4100CE90AE /* VRGCalendarView */,
-				542300A3192C393200830A4C /* rcfViewController.h */,
-				542300A4192C393200830A4C /* rcfViewController.m */,
+				542300A3192C393200830A4C /* rcfCalendarViewController.h */,
+				542300A4192C393200830A4C /* rcfCalendarViewController.m */,
 				54AD48DF196855F40088D4F4 /* Podcast */,
 				54AD48DE196855E40088D4F4 /* Blog */,
 			);
@@ -468,7 +468,7 @@
 				54AD48CF1967AEC00088D4F4 /* rcfBlogParseOperation.m in Sources */,
 				5472874D1933B5FA00AE68D0 /* rcfPodcastDetailView.m in Sources */,
 				541EC6AE1976DA4100CE90AE /* UIColor+expanded.m in Sources */,
-				542300A5192C393200830A4C /* rcfViewController.m in Sources */,
+				542300A5192C393200830A4C /* rcfCalendarViewController.m in Sources */,
 				541EC69F1976D60300CE90AE /* MXLCalendarManager.m in Sources */,
 				547AEA04199BC08000C841B2 /* rcfQuoteViewController.m in Sources */,
 				541EC6AF1976DA4100CE90AE /* UIView+convenience.m in Sources */,
@@ -612,7 +612,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
 				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -630,7 +630,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Refuge Christian Fellowship/Refuge Christian Fellowship-Prefix.pch";
 				INFOPLIST_FILE = "Refuge Christian Fellowship/Refuge Christian Fellowship-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
